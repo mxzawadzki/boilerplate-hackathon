@@ -14,11 +14,11 @@ class QrController extends Controller
 
         $QR = $qr->first();
 
-        $string = $QR ? $QR->string : "";
+        $points = $QR ? $QR->points : -1;
 
         return response()->json([
-            "valid" => $QR === null,
-            "string" => $string,
+            "valid" => $QR !== null,
+            "points" => $points,
         ]);
     }
 
