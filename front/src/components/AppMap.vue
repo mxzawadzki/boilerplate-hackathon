@@ -8,7 +8,12 @@
       @update:bounds="boundsUpdated"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker class="marker" v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
+    <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
+      <l-icon>
+        <div class="d">User</div>
+      </l-icon>
+    </l-marker>
+      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
         <l-popup>
           <p class="marker__text">{{marker.properties.popupContent}}</p>
           <a class="marker__link" :href="baseUrl + setCoords(marker.geometry.coordinates)">Link</a>
@@ -37,6 +42,10 @@ export default {
   },
   data () {
     return {
+      userAccept: false,
+      user: {
+        geometry: {}
+      },
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       icon: L.icon({
         iconUrl: require('@/assets/img/bottle.png'),
@@ -79,6 +88,30 @@ export default {
     }
   },
   methods: {
+    successPosition(position) {
+      const latitude  = position.coords.latitude
+      const longitude = position.coords.longitude
+      this.getUserPermission = true
+
+      // status.textContent = '';
+      this.user.geometry.coordinates = [latitude, longitude]
+    },
+    errorPosition() {
+      //  status.textContent = 'Unable to retrieve your location'
+      // TODO center on warsaw
+    },
+    getUserPermission() {
+      console.log('inside getUse')
+      if ("geolocation" in navigator) {
+        /* geolocation is available */
+        navigator.geolocation.getCurrentPosition(this.successPosition, this.errorPosition)
+        console.log('success')
+      } else {
+        /* geolocation IS NOT available */
+        return 
+      }
+    },
+    getUserPosition() {},
     showPopup(e) {
       console.log(e)
     },
@@ -91,6 +124,9 @@ export default {
     boundsUpdated (bounds) {
       this.bounds = bounds;
     }
+  },
+  mounted() {
+    this.getUserPermission();
   },
   computed: {
     options() {
@@ -131,7 +167,6 @@ export default {
 
 <style lang="scss">
 .marker {
-
   &__text {
     font-size: 1rem;
   }
