@@ -26,13 +26,14 @@
 </template>
 
 <script>
-import {LMap, LTileLayer, LMarker } from 'vue2-leaflet'
+import {LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet'
 export default {
   name: 'AppMap',
   components: {
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    LGeoJson
   },
   data () {
     return {
