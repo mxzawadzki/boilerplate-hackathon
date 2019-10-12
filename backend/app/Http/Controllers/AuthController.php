@@ -4,17 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Socialite;
+use App\Services\SocialiteService;
 
 class AuthController extends Controller
 {
-    public function SocialSignup (Request $request) {
-        // Socialite will pick response data automatic 
-        $provide = $request->provider;
-        $user = Socialite::driver($provider)->stateless()->user();
-        return response()->json($user);
+
+    protected $socialiteService;
+
+    public function __construct() {
+        $this->socialiteService = new SocialiteService();
     }
-
-    public function index() {
-
+    /**
+     * Redirect the user to the social network authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return response()
+            ->json($this->socialiteService
+                ->getRedirectUrlByProvider($provider));
+    }
+    /**
+     * Obtain the user information from social network
+     *
+     * @return Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $result = $this->socialiteService->loginWithSocialite($provider);
+        return redirect($result['redirect_url'])
+        ->withCookie($result['cookie']);
     }
 }
