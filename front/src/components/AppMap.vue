@@ -112,6 +112,9 @@ export default {
       }
     },
     getUserPosition() {},
+    setCoords(coords) {
+      return coords.join()
+    },
     showPopup(e) {
       console.log(e)
     },
