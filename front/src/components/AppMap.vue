@@ -16,7 +16,8 @@
       <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
         <l-popup>
           <p class="marker__text">{{marker.properties.popupContent}}</p>
-          <a class="marker__link" :href="baseUrl + origin + '&destination=' + setCoords(marker.geometry.coordinates)">Link</a>
+          <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Link</a>
+          <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Link</a>
         </l-popup>
         <!-- <l-icon
           :icon-anchor="staticAnchor"
@@ -60,7 +61,7 @@ export default {
       zoom: 3,
       center: [52.2297, 21.0122],
       // baseUrl: 'https://www.google.pl/maps/place/',
-      baseUrl: 'https://www.google.com/maps/dir/?api=1&origin=',
+      baseUrl: 'https://www.google.com/maps/dir/?api=1',
       markers: [
         {
           "type": "Feature",
@@ -125,6 +126,7 @@ export default {
     errorPosition() {
       //  status.textContent = 'Unable to retrieve your location'
       // TODO center on warsaw
+      //origin: '52.183554,21.000471',
     },
     getUserPermission() {
       console.log('inside getUse')
@@ -139,6 +141,7 @@ export default {
     },
     getUserPosition() {},
     setCoords(coords) {
+      console.log(this.userAccept)
       return coords.join()
     },
     showPopup(e) {
