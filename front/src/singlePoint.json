@@ -1,0 +1,12 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "RKS Skra",
+    "amenity": "Przed wejściem na stadion",
+    "popupContent": "Najlepsze ceny na Mokotowie"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [52.215901, 20.994437]
+  }
+}
