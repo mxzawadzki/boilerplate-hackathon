@@ -7,54 +7,32 @@
     @update:center="centerUpdated"
     @update:bounds="boundsUpdated"
   >
-    <l-tile-layer :url="url"></l-tile-layer><<<<<<< HEAD
+    <l-tile-layer :url="url"></l-tile-layer>
     <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
       <l-icon>
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-    =======
-    >>>>>>> HEAD@{4}
     <l-marker
       v-for="marker in markers"
       :key="marker.id"
       :lat-lng="marker.geometry.coordinates"
       @click="showPopup"
     >
-      <<<<<<< HEAD
-      <l-popup>{{marker.properties.popupContent}}</l-popup>
-      <l-icon :icon-anchor="staticAnchor" class-name="someExtraClass">
+      <l-popup>
+        <p class="markertext">{{marker.properties.popupContent}}</p>
+        <!-- <a class="markerlink" :href="baseUrl + setCoords(marker.geometry.coordinates)">Link</a> -->
+      </l-popup>
+      <l-icon :icon-anchor="staticAnchor" class="marker__icon" class-name="someExtraClass">
         <div class="headline">{{ customText }}</div>
         <img src="@/assets/img/bottle.png" />
-      </l-icon>=======
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
-        <l-icon>
-          <div class="d">User</div>
-        </l-icon>
-      </l-marker>
-      <l-marker
-        v-for="marker in markers"
-        :key="marker.id"
-        :lat-lng="marker.geometry.coordinates"
-        @click="showPopup"
-      >
-        <l-popup>{{marker.properties.popupContent}}</l-popup>
-        <l-icon :icon-anchor="staticAnchor" class-name="someExtraClass">
-          <div class="headline">{{ customText }}</div>
-          <img src="@/assets/img/bottle.png" />
-        </l-icon>
-      </l-marker>
-      >>>>>>> HEAD@{4}
+      </l-icon>
     </l-marker>
   </l-map>
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
 import { getPointsForBounds } from "@/utils/api.js";
->>>>>>> HEAD@{4}
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "vue2-leaflet";
 export default {
   name: "AppMap",
@@ -148,7 +126,9 @@ export default {
       this.center = center;
     },
     boundsUpdated(bounds) {
-      getPointsForBounds(bounds);
+      getPointsForBounds(bounds).then(markers => {
+        this.markers = markers;
+      });
       this.bounds = bounds;
     }
   },
