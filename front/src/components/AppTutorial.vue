@@ -20,6 +20,7 @@
               <img class="slider__img" :src="slide.img">
               <p class="slider__number">{{ i + 1 }}</p>
               <p class="slider__text">{{slide.text}}</p>
+              <button v-if="i === 3">Do dzieła!</button>
             </div>
           </v-row>
         </v-sheet>
@@ -35,22 +36,22 @@ data () {
   return {
     slides: [
       {
-        img: require('@/assets/img/slide1.jpg'),
+        // img: require('@/assets/img/slide1.jpg'),
         color: 'primary',
         text: 'Zaloguj się lub wyświetl mapę'
       },
       {
-        img: require('@/assets/img/slide1.jpg'),
+        // img: require('@/assets/img/slide1.jpg'),
         color: 'secondary',
         text: 'Znajdź najbliższy butelkomat'
       },
       {
-        img: require('@/assets/img/slide1.jpg'),
+        // img: require('@/assets/img/slide1.jpg'),
         color: 'yellow darken-2',
         text: 'Zeskanuj kod QR i wrzuć butelkę'
       },
       {
-        img: require('@/assets/img/slide1.jpg'),
+        // img: require('@/assets/img/slide1.jpg'),
         color: 'red',
         text: 'Za każdą butelkę zdobywaj super nagrody'
       }
