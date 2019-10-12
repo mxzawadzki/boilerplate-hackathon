@@ -58,7 +58,7 @@ class PlaceInAreaTest extends TestCase
     public function area(array $boundaries, $resourceAnswer)
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user, 'api')->post("api/miejsca-w-obszarze", ['boundaries' => $boundaries])
+        $this->actingAs($user, 'api')->post("api/miejsca/w-obszarze", ['boundaries' => $boundaries])
             ->assertJson($resourceAnswer->toArray(true));
 
         $user->delete();

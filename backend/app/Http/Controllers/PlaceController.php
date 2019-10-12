@@ -17,7 +17,7 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function placesInArea(PlacesInAreaRequest $request){
+    public function inArea(PlacesInAreaRequest $request){
         $boundaries = $request->boundaries;
 
         $places = Place::all()->filter(function (Place $place) use ($boundaries){

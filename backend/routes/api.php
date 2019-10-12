@@ -17,6 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->name('api')->group(function(){
-    Route::post('/miejsca-w-obszarze','PlaceController@placesInArea')->name('placesInArea');
+Route::middleware('auth:api')->name('api.')->group(function(){
+    Route::name('places')->prefix('miejsca')->group(function(){
+        Route::post('/w-obszarze','PlaceController@inArea')->name('inArea');
+    });
+
+
+    Route::name('qrs')->prefix('qry')->group(function(){
+        Route::post('/wygeneruj','QRController@generate')->name('generate');
+        Route::post('/zweryfikuj','QRController@verify')->name('verify');
+    });
+
 });
