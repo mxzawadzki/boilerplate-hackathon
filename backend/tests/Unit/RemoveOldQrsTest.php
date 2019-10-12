@@ -41,7 +41,7 @@ class RemoveOldQrsTest extends TestCase
         $qr2->created_at = $date->toDateTimeString();
         $qr2->save();
 
-        RemoveOldQrs::remove($minutes);
+        RemoveOldQrsTask::remove($minutes);
 
         $this->assertTrue($count +1 === Qr::count());
 
