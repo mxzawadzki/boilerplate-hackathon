@@ -7,28 +7,26 @@
     @update:center="centerUpdated"
     @update:bounds="boundsUpdated"
   >
-    <l-tile-layer :url="url"></l-tile-layer>
-<<<<<<< HEAD
+    <l-tile-layer :url="url"></l-tile-layer><<<<<<< HEAD
     <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
       <l-icon>
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-=======
->>>>>>> HEAD@{4}
+    =======
+    >>>>>>> HEAD@{4}
     <l-marker
       v-for="marker in markers"
       :key="marker.id"
       :lat-lng="marker.geometry.coordinates"
       @click="showPopup"
     >
-<<<<<<< HEAD
+      <<<<<<< HEAD
       <l-popup>{{marker.properties.popupContent}}</l-popup>
       <l-icon :icon-anchor="staticAnchor" class-name="someExtraClass">
         <div class="headline">{{ customText }}</div>
         <img src="@/assets/img/bottle.png" />
-      </l-icon>
-=======
+      </l-icon>=======
       <l-tile-layer :url="url"></l-tile-layer>
       <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
         <l-icon>
@@ -47,7 +45,7 @@
           <img src="@/assets/img/bottle.png" />
         </l-icon>
       </l-marker>
->>>>>>> HEAD@{4}
+      >>>>>>> HEAD@{4}
     </l-marker>
   </l-map>
 </template>
@@ -83,11 +81,7 @@ export default {
       customText: "Bottle Drop",
       iconSize: 64,
       zoom: 16,
-<<<<<<< HEAD
       center: [52.2297, 21.0122],
-=======
-      center: [52.211900643211195, 20.99944747210445],
->>>>>>> HEAD@{4}
       markers: [
         {
           type: "Feature",
@@ -121,7 +115,6 @@ export default {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       this.getUserPermission = true;
-<<<<<<< HEAD
 
       // status.textContent = '';
       this.user.geometry.coordinates = [latitude, longitude];
@@ -142,17 +135,6 @@ export default {
       } else {
         /* geolocation IS NOT available */
         return;
-=======
-      // status.textContent = '';
-      // this.user.geometry.coordinates = [latitude, longitude]
-      this.center = [latitude, longitude];
-    },
-    getUserPermission() {
-      console.log("inside getUse");
-      if ("geolocation" in navigator) {
-        /* geolocation is available */
-        navigator.geolocation.getCurrentPosition(this.successPosition);
->>>>>>> HEAD@{4}
       }
     },
     getUserPosition() {},
@@ -166,10 +148,7 @@ export default {
       this.center = center;
     },
     boundsUpdated(bounds) {
-<<<<<<< HEAD
-=======
       getPointsForBounds(bounds);
->>>>>>> HEAD@{4}
       this.bounds = bounds;
     }
   },
