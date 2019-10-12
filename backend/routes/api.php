@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->name('api.')->group(function(){
+Route::middleware('api')->name('api.')->group(function(){
     Route::name('places')->prefix('miejsca')->group(function(){
         Route::post('/w-obszarze','PlaceController@inArea')->name('inArea');
     });
