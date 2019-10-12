@@ -3,6 +3,16 @@ import firebase from 'firebase';
 import App from './App.vue'
 import store from './store'
 import router from './router'
+import { Icon }  from 'leaflet'
+// import 'leaflet/dist/leaflet.css'
+
+delete Icon.Default.prototype._getIconUrl;
+
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('@/assets/leaflet/marker-icon-2x.png'),
+  iconUrl: require('@/assets/leaflet/marker-icon.png'),
+  shadowUrl: require('@/assets/leaflet/marker-shadow.png')
+});
 
 Vue.config.productionTip = false
 
