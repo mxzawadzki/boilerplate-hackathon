@@ -5,16 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GenerateQrRequest;
 use App\Http\Requests\VerifyQrRequest;
 use App\Qr;
+use App\User;
 
 class QrController extends Controller
 {
     public function verify(VerifyQRRequest $request)
     {
+        $user = auth()->user();
+
         $qr = Qr::where("string", "like", $request->string)->get();
 
         $QR = $qr->first();
 
         $points = $QR ? $QR->points : -1;
+
+        if($user){
+            if ($points>=0){
+                $user->score+=$points;
+                $user->save();
+            }
+        }
 
         return response()->json([
             "valid" => $QR !== null,

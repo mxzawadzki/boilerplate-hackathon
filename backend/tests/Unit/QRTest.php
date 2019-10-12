@@ -36,9 +36,4 @@ class QRTest extends TestCase
         $user->delete();
 
     }
-
-    public function area(array $boundaries, $resourceAnswer)
-    {
-
-    }
 }
