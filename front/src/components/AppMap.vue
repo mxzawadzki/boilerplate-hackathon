@@ -8,6 +8,11 @@
       @update:bounds="boundsUpdated"
     >
       <l-tile-layer :url="url"></l-tile-layer>
+    <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
+      <l-icon>
+        <div class="d">User</div>
+      </l-icon>
+    </l-marker>
       <l-marker v-for="marker in markers" :key="marker.id" @click="showPopup" :lat-lng="marker.geometry.coordinates">
         <l-popup>{{marker.properties.popupContent}}</l-popup>
         <l-icon
@@ -32,6 +37,10 @@ export default {
   },
   data () {
     return {
+      userAccept: false,
+      user: {
+        geometry: {}
+      },
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       zoom: 3,
       center: [52.2297, 21.0122],
@@ -64,6 +73,30 @@ export default {
     }
   },
   methods: {
+    successPosition(position) {
+      const latitude  = position.coords.latitude
+      const longitude = position.coords.longitude
+      this.getUserPermission = true
+
+      // status.textContent = '';
+      this.user.geometry.coordinates = [latitude, longitude]
+    },
+    errorPosition() {
+      //  status.textContent = 'Unable to retrieve your location'
+      // TODO center on warsaw
+    },
+    getUserPermission() {
+      console.log('inside getUse')
+      if ("geolocation" in navigator) {
+        /* geolocation is available */
+        navigator.geolocation.getCurrentPosition(this.successPosition, this.errorPosition)
+        console.log('success')
+      } else {
+        /* geolocation IS NOT available */
+        return 
+      }
+    },
+    getUserPosition() {},
     showPopup(e) {
 
     },
@@ -76,6 +109,9 @@ export default {
     boundsUpdated (bounds) {
       this.bounds = bounds;
     }
+  },
+  mounted() {
+    this.getUserPermission();
   },
   computed: {
     options() {
