@@ -17,6 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('sociallogin/{provider}', 'AuthController@SocialSignup');
+Route::get('auth/{provider}/callback', 'AuthController@index')->where('provider', '.*');
+
 Route::middleware('api')->name('api.')->group(function(){
     Route::name('places')->prefix('miejsca')->group(function(){
         Route::post('/w-obszarze','PlaceController@inArea')->name('inArea');
