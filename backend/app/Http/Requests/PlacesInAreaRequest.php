@@ -36,11 +36,11 @@ class PlacesInAreaRequest extends FormRequest
                     if (count($value)!== 2) {
                         $fail($attribute.' ma za zły format');
                     }
-                    if(abs($value[0])>180){
-                        $fail($attribute.' ma złą szerokość');
+                    if(abs($value[0])>90){
+                        $fail($attribute.' ma złą szerokośc');
                     }
-                    if(abs($value[1])>90){
-                        $fail($attribute.' ma złą wysokość');
+                    if(abs($value[1])>180){
+                        $fail($attribute.' ma złą wysokosc');
                     }
                 },
             ]

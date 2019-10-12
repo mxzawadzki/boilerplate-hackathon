@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class QR extends Model
+class Qr extends Model
 {
     protected $fillable = [
         "string",
