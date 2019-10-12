@@ -2,6 +2,9 @@
   <div class="userbar">
     <v-btn depressed color="primary" @click.stop="dialog = true">Login</v-btn>
     <v-btn depressed color="primary">Menu</v-btn>
+    <v-btn class="mx-2" fab dark small color="primary" @click="showTutorial">
+      <v-icon dark>mdi-help</v-icon>
+    </v-btn>
     <v-dialog
         v-model="dialog"
         max-width="290"
