@@ -21,26 +21,26 @@ export default {
       console.log('dupa');
 
     console.log(this.$auth);
-      // this.$auth
-      //   .authenticate(provider)
-      //   .then(response => {
-      //     // this.SocialLogin(provider, response);
-      //   })
-      //   .catch(err => {
-      //     console.log({ err: err });
-      //   });
+      this.$auth
+        .authenticate(provider)
+        .then(response => {
+          this.SocialLogin(provider, response);
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
 
     SocialLogin(provider, response) {
       console.log('siema');
-      // this.$http
-      //   .post("/sociallogin/" + provider, response)
-      //   .then(response => {
-      //     console.log(response.data);
-      //   })
-      //   .catch(err => {
-      //     console.log({ err: err });
-      //   });
+      this.$http
+        .post("/sociallogin/" + provider, response)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     }
   }
 };

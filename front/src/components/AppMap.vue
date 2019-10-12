@@ -13,15 +13,12 @@
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-    =======
-    >>>>>>> HEAD@{4}
     <l-marker
       v-for="marker in markers"
       :key="marker.id"
       :lat-lng="marker.geometry.coordinates"
       @click="showPopup"
     >
-      <<<<<<< HEAD
       <l-popup>{{marker.properties.popupContent}}</l-popup>
       <l-icon :icon-anchor="staticAnchor" class-name="someExtraClass">
         <div class="headline">{{ customText }}</div>
@@ -45,16 +42,12 @@
           <img src="@/assets/img/bottle.png" />
         </l-icon>
       </l-marker>
-      >>>>>>> HEAD@{4}
     </l-marker>
   </l-map>
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
 import { getPointsForBounds } from "@/utils/api.js";
->>>>>>> HEAD@{4}
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "vue2-leaflet";
 export default {
   name: "AppMap",
