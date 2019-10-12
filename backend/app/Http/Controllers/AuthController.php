@@ -30,10 +30,10 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback(Reqeust $request, $provider)
     {
-        $result = $this->socialiteService->loginWithSocialite($provider);
-        return redirect($result['redirect_url'])
-        ->withCookie($result['cookie']);
+        $token = $request->header('Authorization') ?? $request->get('api_token'); 
+        $result = $this->socialiteService->loginWithSocialite($provider, $token);
+        return response()->json()->withCookie($result['cookie']);
     }
 }

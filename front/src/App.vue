@@ -1,47 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>|
-      <router-link to="/scanner">Scanner</router-link>
-    </div>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <router-view/>
 
-    <button @click="AuthProvider('google')">Login GOOGLE</button>
-    <router-view />
   </div>
 </template>
 
 <script>
+
+
+
+
 export default {
   data() {
     return {};
   },
   methods: {
-    AuthProvider(provider) {
-      console.log('dupa');
 
-    console.log(this.$auth);
-      this.$auth
-        .authenticate(provider)
-        .then(response => {
-          this.SocialLogin(provider, response);
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
-
-    SocialLogin(provider, response) {
-      console.log('siema');
-      this.$http
-        .post("/sociallogin/" + provider, response)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    }
+  },
+  mounted() {
+    let api = gapi.auth2.init()
+    // console.log()
+    //  var auth2 = gapi.signIn.go();
+     console.log(auth2);
+     function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
   }
 };
 </script>
@@ -55,5 +43,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>

@@ -3,7 +3,6 @@
 
 namespace App\Helpers;
 
-
 use Illuminate\Support\Facades\Hash;
 
 class SocialiteHelper

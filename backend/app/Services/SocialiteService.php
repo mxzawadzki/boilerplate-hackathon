@@ -17,9 +17,10 @@ class SocialiteService
                 ->getTargetUrl()
         ];
     }
-    public function loginWithSocialite($provider): array
+    public function loginWithSocialite($provider, $token): array
     {
-        $userSocial = Socialite::driver($provider)->stateless()->user();
+        $userSocial = Socialite::driver($provider)->createUserFromToken($token);
+        // dd($userSocial);
         if (SocialiteHelper::isSocialPresent($userSocial)) {
             $user = $this->searchUserByEmail($userSocial->email);
             if ($user) {
@@ -28,7 +29,14 @@ class SocialiteService
                     ? $this->prepareSuccessResult($user)
                     : $this->prepareErrorResult();
             } else {
+                
                 $user = New User([], $userSocial);
+                $user->email = $userSocial->email;
+                $user->score = 0;
+                $user->name = $userSocial->name;
+                $user->password = NULL;
+                $user->api_token = $userSocial->token;
+
                 return $user->save()
                     ? $this->prepareSuccessResult($user)
                     : $this->prepareErrorResult();
@@ -47,6 +55,7 @@ class SocialiteService
             false,
             false
         );
+        
         return $result;
     }
     private function searchUserByEmail($email): ?User

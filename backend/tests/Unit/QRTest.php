@@ -5,6 +5,8 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\User;
+use App\Qr;
 
 class QRTest extends TestCase
 {
@@ -16,15 +18,22 @@ class QRTest extends TestCase
     public function testExample()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user, 'api')->post("api/qry/generate", ['boundaries' => $boundaries])
-            ->assertJson(["string"=>QR::first()->string]);
+        $this->actingAs($user, 'api')->post("api/qry/wygeneruj", ['points' => 13])
+            ->assertJson(["string"=>Qr::first()->string]);
+
+        $this->assertTrue(Qr::first()->points === 13);
+
+
+        $this->actingAs($user, 'api')->post("api/qry/zweryfikuj", ['string' => Qr::first()->string])
+            ->assertJson(["valid"=>true,"points"=>Qr::first()->points]);
+
+
+        $this->actingAs($user, 'api')->post("api/qry/zweryfikuj", ['string' => "fdasfjdasfjdashfkdas"])
+            ->assertJson(["valid"=>false,"points"=>-1]);
+
+        Qr::first()->delete();
 
         $user->delete();
-
-    }
-
-    public function area(array $boundaries, $resourceAnswer)
-    {
 
     }
 }

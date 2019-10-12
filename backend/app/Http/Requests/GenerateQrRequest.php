@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyQRRequest extends FormRequest
+class GenerateQrRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class VerifyQRRequest extends FormRequest
     public function rules()
     {
         return [
-            "string" => [
-                "string",
+            "points" => [
+                "int",
+                "required",
                 "min:0",
-                "required"
-            ]
+            ],
         ];
     }
 }

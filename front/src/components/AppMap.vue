@@ -13,31 +13,15 @@
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-    <l-marker
-      v-for="marker in markers"
-      :key="marker.id"
-      :lat-lng="marker.geometry.coordinates"
-      @click="showPopup"
-    >
-      <l-popup>{{marker.properties.popupContent}}</l-popup>
-      <l-icon :icon-anchor="staticAnchor" class-name="someExtraClass">
-        <div class="headline">{{ customText }}</div>
-        <img src="@/assets/img/bottle.png" />
-      </l-icon>=======
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
-        <l-icon>
-          <div class="d">User</div>
-        </l-icon>
-      </l-marker>
-      <l-marker
-        v-for="marker in markers"
-        :key="marker.id"
-        :lat-lng="marker.geometry.coordinates"
-        @click="showPopup"
-      >
-        <l-popup>{{marker.properties.popupContent}}</l-popup>
-        <l-icon :icon-anchor="staticAnchor" class-name="someExtraClass">
+      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
+        <l-popup>
+          <p class="marker__text">{{marker.properties.popupContent}}</p>
+          <a class="marker__link" :href="baseUrl + setCoords(marker.geometry.coordinates)">Link</a>
+        </l-popup>
+        <l-icon
+          :icon-anchor="staticAnchor"
+          class="marker__icon"
+          class-name="someExtraClass">
           <div class="headline">{{ customText }}</div>
           <img src="@/assets/img/bottle.png" />
         </l-icon>
@@ -75,6 +59,8 @@ export default {
       iconSize: 64,
       zoom: 16,
       center: [52.2297, 21.0122],
+      // baseUrl: 'https://www.google.pl/maps/place/',
+      baseUrl: 'https://www.google.com/maps/dir/?api=1&origin=',
       markers: [
         {
           type: "Feature",
@@ -131,6 +117,9 @@ export default {
       }
     },
     getUserPosition() {},
+    setCoords(coords) {
+      return coords.join()
+    },
     showPopup(e) {
       console.log(e);
     },
@@ -185,5 +174,15 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style>
 </style>
+=======
+<style lang="scss">
+.marker {
+  &__text {
+    font-size: 1rem;
+  }
+}
+</style>
+>>>>>>> c1a849f208791206618cd7ad1cdfdc3f10fbed95

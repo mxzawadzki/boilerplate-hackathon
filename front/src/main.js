@@ -21,6 +21,23 @@ Vue.use(VueSocialauth, {
   },
 })
 
+window.onSignIn = function (googleUser) {
+  const profile = googleUser.getBasicProfile()
+  const { id_token } = googleUser.getAuthResponse()
+  console.log(id_token)
+
+  fetch('http://boilerplate-hackathon.damianjamka.com/auth/google/callback', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  }).then((res) => {
+    console.log(res.json())
+  })
+}
+
 delete Icon.Default.prototype._getIconUrl
 
 Icon.Default.mergeOptions({
