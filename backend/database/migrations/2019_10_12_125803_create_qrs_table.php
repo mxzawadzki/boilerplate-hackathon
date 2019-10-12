@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddScoreToUsersTable extends Migration
+class CreateQrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddScoreToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('score')->after('email')->default(0);
+        Schema::create('qrs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('string');
+            $table->unsignedInteger('points');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddScoreToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('score');
-        });
+        Schema::dropIfExists('qrs');
     }
 }
