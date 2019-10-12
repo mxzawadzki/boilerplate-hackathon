@@ -19,8 +19,8 @@ class CreatePlacesTable extends Migration
             $table->string('address');
             $table->string('open_week_at');
             $table->string('open_weekend_at');
-            $table->float('lat')->nullable();
-            $table->float('lng')->nullable();
+            $table->double('lat',16,6)->nullable();
+            $table->double('lng',16,6)->nullable();
             $table->timestamps();
         });
     }
