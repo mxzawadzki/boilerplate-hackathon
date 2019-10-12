@@ -13,27 +13,28 @@
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-      <l-marker v-for="marker in markers" :key="marker.id" @click="showPopup" :lat-lng="marker.geometry.coordinates">
+      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
         <l-popup>{{marker.properties.popupContent}}</l-popup>
         <l-icon
           :icon-anchor="staticAnchor"
           class-name="someExtraClass">
           <div class="headline">{{ customText }}</div>
-          <img src="static/images/layers.png">
+          <img src="@/assets/img/bottle.png">
         </l-icon>
       </l-marker>
     </l-map>
 </template>
 
 <script>
-import {LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
+import {LMap, LTileLayer, LMarker, LPopup, LIcon } from 'vue2-leaflet'
 export default {
   name: 'AppMap',
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LPopup
+    LPopup,
+    LIcon
   },
   data () {
     return {
@@ -42,6 +43,14 @@ export default {
         geometry: {}
       },
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      icon: L.icon({
+        iconUrl: require('@/assets/img/bottle.png'),
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      }),
+      staticAnchor: [16, 37],
+      customText: 'Bottle Drop',
+      iconSize: 64,
       zoom: 3,
       center: [52.2297, 21.0122],
       markers: [
@@ -98,7 +107,7 @@ export default {
     },
     getUserPosition() {},
     showPopup(e) {
-
+      console.log(e)
     },
     zoomUpdated (zoom) {
       this.zoom = zoom;
