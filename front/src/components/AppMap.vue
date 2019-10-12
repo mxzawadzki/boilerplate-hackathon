@@ -1,6 +1,6 @@
 <template>
   <l-map
-      style="height: 80%; width: 100%"
+      style="height: 100vh; width: 100vw"
       :zoom="zoom"
       :center="center"
       @update:zoom="zoomUpdated"
@@ -27,7 +27,18 @@ export default {
       zoom: 3,
       center: [47.413220, -1.219482],
       markerLatLng: [47.313220, -1.319482]
-    };
+    }
+  },
+  methods: {
+    zoomUpdated (zoom) {
+      this.zoom = zoom;
+    },
+    centerUpdated (center) {
+      this.center = center;
+    },
+    boundsUpdated (bounds) {
+      this.bounds = bounds;
+    }
   }
 }
 </script>
