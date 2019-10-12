@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddScoreToUsersTable extends Migration
+class AddToPlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddScoreToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('score')->after('email')->default(0);
+        Schema::table('places', function (Blueprint $table) {
+            $table->string('amenity');
+            $table->string('popup_content');
         });
     }
 
@@ -25,8 +26,9 @@ class AddScoreToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('score');
+        Schema::table('places', function (Blueprint $table) {
+            $table->dropColumn('amenity');
+            $table->dropColumn('popup_content');
         });
     }
 }
