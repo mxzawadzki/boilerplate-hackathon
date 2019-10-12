@@ -1,11 +1,46 @@
 import Vue from 'vue'
+import firebase from 'firebase'
 import { Icon } from 'leaflet'
-import App from './App.vue'
-import store from './store'
-import router from './router'
-// import 'leaflet/dist/leaflet.css'
+import VueSocialauth from 'vue-social-auth'
+import VueAxios from 'vue-axios'
 
 import vuetify from './plugins/vuetify'
+
+import axios from 'axios'
+import store from './store'
+import router from './router'
+import App from './App.vue'
+
+Vue.use(VueAxios, axios)
+// import 'leaflet/dist/leaflet.css'
+
+Vue.use(VueSocialauth, {
+    providers: {
+        google: {
+            clientId:
+                '324788647488-tcadv6ov0o139k3d8pm3enmj950d45k4.apps.googleusercontent.com',
+            redirectUri:
+                'http://boilerplate-hackathon.damianjamka.com/api/social/google/callback'
+        }
+    }
+})
+
+window.onSignIn = function(googleUser) {
+    const profile = googleUser.getBasicProfile()
+    const { id_token } = googleUser.getAuthResponse()
+    console.log(id_token)
+
+    fetch('http://boilerplate-hackathon.damianjamka.com/auth/google/callback', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    }).then(res => {
+        console.log(res.json())
+    })
+}
 
 delete Icon.Default.prototype._getIconUrl
 
@@ -14,6 +49,19 @@ Icon.Default.mergeOptions({
     iconUrl: require('@/assets/leaflet/marker-icon.png'),
     shadowUrl: require('@/assets/leaflet/marker-shadow.png')
 })
+
+Vue.config.productionTip = false
+
+const firebaseConfig = {
+    apiKey: 'YOUR_API_KEY',
+    authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+    databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
+    projectId: 'YOUR_PROJECT_ID',
+    storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+    messagingSenderId: 'YOUR_MESSAGING_SEND_ID'
+}
+
+firebase.initializeApp(firebaseConfig)
 
 new Vue({
     store,
