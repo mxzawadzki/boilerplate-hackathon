@@ -5,11 +5,8 @@
       <router-link to="/about">About</router-link>|
       <router-link to="/scanner">Scanner</router-link>
     </div>
-<<<<<<< HEAD
 
     <button @click="AuthProvider('google')">Login GOOGLE</button>
-=======
->>>>>>> f/adamb
     <router-view />
   </div>
 </template>

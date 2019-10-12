@@ -5,6 +5,9 @@ import store from "./store";
 import router from "./router";
 import { Icon } from "leaflet";
 import VueSocialauth from "vue-social-auth";
+import axios from 'axios';
+ 
+Vue.use(VueAxios, axios)
 // import 'leaflet/dist/leaflet.css'
 
 Vue.use(VueSocialauth, {
