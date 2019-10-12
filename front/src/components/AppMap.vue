@@ -8,10 +8,14 @@
       @update:bounds="boundsUpdated"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
-        <l-popup>{{marker.properties.popupContent}}</l-popup>
+      <l-marker class="marker" v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
+        <l-popup>
+          <p class="marker__text">{{marker.properties.popupContent}}</p>
+          <a class="marker__link" :href="baseUrl + setCoords(marker.geometry.coordinates)">Link</a>
+        </l-popup>
         <l-icon
           :icon-anchor="staticAnchor"
+          class="marker__icon"
           class-name="someExtraClass">
           <div class="headline">{{ customText }}</div>
           <img src="@/assets/img/bottle.png">
@@ -44,6 +48,8 @@ export default {
       iconSize: 64,
       zoom: 3,
       center: [52.2297, 21.0122],
+      // baseUrl: 'https://www.google.pl/maps/place/',
+      baseUrl: 'https://www.google.com/maps/dir/?api=1&origin=',
       markers: [
         {
           "type": "Feature",
@@ -123,6 +129,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.marker {
 
+  &__text {
+    font-size: 1rem;
+  }
+}
 </style>
