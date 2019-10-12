@@ -5,6 +5,8 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\User;
+use App\Qr;
 
 class QRTest extends TestCase
 {
@@ -16,8 +18,10 @@ class QRTest extends TestCase
     public function testExample()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user, 'api')->post("api/qry/generate", ['boundaries' => $boundaries])
-            ->assertJson(["string"=>QR::first()->string]);
+        $this->actingAs($user, 'api')->post("api/qry/wygeneruj", ['points' => 13])->assertTrue(Qr::first()->points === 13)
+            ->assertJson(["string"=>Qr::first()->string]);
+
+        Qr::first()->delete();
 
         $user->delete();
 

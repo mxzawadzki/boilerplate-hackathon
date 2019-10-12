@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GenerateQRRequest;
-use App\Http\Requests\VerifyQRRequest;
-use App\QR;
+use App\Http\Requests\GenerateQrRequest;
+use App\Http\Requests\VerifyQrRequest;
+use App\Qr;
 
-class QRController extends Controller
+class QrController extends Controller
 {
     public function verify(VerifyQRRequest $request)
     {
-        $qr = QR::where("string", "like", $request->string)->get();
+        $qr = Qr::where("string", "like", $request->string)->get();
 
         $QR = $qr->first();
 
@@ -24,7 +24,7 @@ class QRController extends Controller
 
     public function generate(GenerateQRRequest $request)
     {
-        $qr = QR::create(["string" => QR::generateString(), "points" => $request->points]);
+        $qr = Qr::create(["string" => Qr::generateString(), "points" => $request->points]);
 
         return response()->json(["string" => $qr->string]);
     }
