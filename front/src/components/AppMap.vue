@@ -19,6 +19,8 @@
       </l-marker> -->
       <l-geo-json v-for="marker in markers" :key="marker.id" @click="showPopup"
         :geojson="marker"
+        :options="options"
+        :options-style="styleFunction"
       >
       </l-geo-json>
     </l-map>
@@ -59,7 +61,7 @@ export default {
   },
   methods: {
     showPopup(e) {
-      console.log(e)
+
     },
     zoomUpdated (zoom) {
       this.zoom = zoom;
@@ -70,7 +72,41 @@ export default {
     boundsUpdated (bounds) {
       this.bounds = bounds;
     }
-  }
+  },
+  computed: {
+    options() {
+      return {
+        onEachFeature: this.onEachFeatureFunction
+      };
+    },
+    styleFunction() {
+      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
+      return () => {
+        return {
+          weight: 2,
+          color: "#ECEFF1",
+          opacity: 1,
+          fillColor: fillColor,
+          fillOpacity: 1
+        };
+      };
+    },
+    onEachFeatureFunction() {
+      if (!this.enableTooltip) {
+        return () => {};
+      }
+      return (feature, layer) => {
+        layer.bindTooltip(
+          "<div>code:" +
+            feature.properties.code +
+            "</div><div>nom: " +
+            feature.properties.nom +
+            "</div>",
+          { permanent: false, sticky: true }
+        );
+      };
+    }
+  },
 }
 </script>
 
