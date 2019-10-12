@@ -18,14 +18,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('api')->name('api.')->group(function(){
-    Route::name('places')->prefix('miejsca')->group(function(){
+    Route::name('places.')->prefix('miejsca')->group(function(){
         Route::post('/w-obszarze','PlaceController@inArea')->name('inArea');
     });
 
 
-    Route::name('qrs')->prefix('qry')->group(function(){
+    Route::name('qrs.')->prefix('qry')->group(function(){
         Route::post('/wygeneruj','QRController@generate')->name('generate');
         Route::post('/zweryfikuj','QRController@verify')->name('verify');
+    });
+
+    Route::name('user.')->prefix('uzytkownik')->group(function(){
+        Route::post('/dane','UserController@data')->name('data');
     });
 
 });
