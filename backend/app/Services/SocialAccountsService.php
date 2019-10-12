@@ -30,7 +30,7 @@ class SocialAccountsService
             }
             if (! $user) {
                 $user = User::create([
-                    'name' = > $providerUser->getName() . ' ' . $providerUser->getName(),
+                    'name' => $providerUser->getName() . ' ' . $providerUser->getName(),
                     'first_name' => $providerUser->getName(),
                     'last_name' => $providerUser->getName(),
                     'email' => $providerUser->getEmail(),
