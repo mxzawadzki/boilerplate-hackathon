@@ -14,7 +14,7 @@ export default {
   name: 'home',
   components: {
     AppMap,
-    UserBar
-  }
+    UserBar,
+  },
 }
 </script>

@@ -32,149 +32,150 @@
 </template>
 
 <script>
-import { getPointsForBounds } from "@/utils/api.js";
-import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "vue2-leaflet";
+import {
+  LMap, LTileLayer, LMarker, LPopup, LIcon,
+} from 'vue2-leaflet'
+import { getPointsForBounds } from '@/utils/api.js'
+
 export default {
-  name: "AppMap",
+  name: 'AppMap',
   components: {
     LMap,
     LTileLayer,
     LMarker,
     LPopup,
-    LIcon
+    LIcon,
   },
   data() {
     return {
       userAccept: false,
       user: {
-        geometry: {}
+        geometry: {},
       },
-      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       icon: L.icon({
-        iconUrl: require("@/assets/img/bottle.png"),
+        iconUrl: require('@/assets/img/bottle.png'),
         iconSize: [32, 37],
-        iconAnchor: [16, 37]
+        iconAnchor: [16, 37],
       }),
       staticAnchor: [16, 37],
-      customText: "Bottle Drop",
+      customText: 'Bottle Drop',
       iconSize: 64,
       zoom: 16,
       center: [52.2297, 21.0122],
       // baseUrl: 'https://www.google.pl/maps/place/',
-      baseUrl: "https://www.google.com/maps/dir/?api=1&origin=",
+      baseUrl: 'https://www.google.com/maps/dir/?api=1&origin=',
       markers: [
         {
-          type: "Feature",
+          type: 'Feature',
           properties: {
-            name: "Coors Field",
-            amenity: "Baseball Stadium",
-            popupContent: "This is where the Rockies play!"
+            name: 'Coors Field',
+            amenity: 'Baseball Stadium',
+            popupContent: 'This is where the Rockies play!',
           },
           geometry: {
-            type: "Point",
-            coordinates: [52.2297, 21.0122]
-          }
+            type: 'Point',
+            coordinates: [52.2297, 21.0122],
+          },
         },
         {
-          type: "Feature",
+          type: 'Feature',
           properties: {
-            name: "Coors Field",
-            amenity: "Baseball Stadium",
-            popupContent: "This is where the Rockies play!"
+            name: 'Coors Field',
+            amenity: 'Baseball Stadium',
+            popupContent: 'This is where the Rockies play!',
           },
           geometry: {
-            type: "Point",
-            coordinates: [51.2297, 20.0122]
-          }
-        }
-      ]
-    };
+            type: 'Point',
+            coordinates: [51.2297, 20.0122],
+          },
+        },
+      ],
+    }
   },
   methods: {
     successPosition(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      this.getUserPermission = true;
+      const { latitude } = position.coords
+      const { longitude } = position.coords
+      this.getUserPermission = true
 
       // status.textContent = '';
-      this.user.geometry.coordinates = [latitude, longitude];
-      this.center = [latitude, longitude];
+      this.user.geometry.coordinates = [latitude, longitude]
+      this.center = [latitude, longitude]
     },
     errorPosition() {
       //  status.textContent = 'Unable to retrieve your location'
       // TODO center on warsaw
     },
     getUserPermission() {
-      if ("geolocation" in navigator) {
+      if ('geolocation' in navigator) {
         /* geolocation is available */
         navigator.geolocation.getCurrentPosition(
           this.successPosition,
-          this.errorPosition
-        );
-        console.log("success");
+          this.errorPosition,
+        )
+        console.log('success')
       } else {
         /* geolocation IS NOT available */
-        return;
+
       }
     },
     getUserPosition() {},
     setCoords(coords) {
-      return coords.join();
+      return coords.join()
     },
     showPopup(e) {
-      console.log(e);
+      console.log(e)
     },
     zoomUpdated(zoom) {
-      this.zoom = zoom;
+      this.zoom = zoom
     },
     centerUpdated(center) {
-      this.center = center;
+      this.center = center
     },
     boundsUpdated(bounds) {
-      getPointsForBounds(bounds).then(markers => {
-        this.markers = markers;
-      });
-      this.bounds = bounds;
-    }
+      getPointsForBounds(bounds).then((markers) => {
+        this.markers = markers
+      })
+      this.bounds = bounds
+    },
   },
   mounted() {
-    this.getUserPermission();
+    this.getUserPermission()
   },
   computed: {
     options() {
       return {
-        onEachFeature: this.onEachFeatureFunction
-      };
+        onEachFeature: this.onEachFeatureFunction,
+      }
     },
     styleFunction() {
-      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
-      return () => {
-        return {
-          weight: 2,
-          color: "#ECEFF1",
-          opacity: 1,
-          fillColor: fillColor,
-          fillOpacity: 1
-        };
-      };
+      const { fillColor } = this // important! need touch fillColor in computed for re-calculate when change fillColor
+      return () => ({
+        weight: 2,
+        color: '#ECEFF1',
+        opacity: 1,
+        fillColor,
+        fillOpacity: 1,
+      })
     },
     onEachFeatureFunction() {
       if (!this.enableTooltip) {
-        return () => {};
+        return () => {}
       }
       return (feature, layer) => {
         layer.bindTooltip(
-          "<div>code:" +
-            feature.properties.code +
-            "</div><div>nom: " +
-            feature.properties.nom +
-            "</div>",
-          { permanent: false, sticky: true }
-        );
-      };
-    }
-  }
-};
+          `<div>code:${
+            feature.properties.code
+          }</div><div>nom: ${
+            feature.properties.nom
+          }</div>`,
+          { permanent: false, sticky: true },
+        )
+      }
+    },
+  },
+}
 </script>
 
 <style lang="scss">
