@@ -7,7 +7,7 @@
       <b>{{ result }}</b>
     </p>
 
-    <qrcode-stream @decode="onDecode" @init="onInit" />
+    <qrcode-stream @decode="onDecode" @init="onInit" class="VideoPreview" />
   </div>
 </template>
 
@@ -56,5 +56,10 @@ export default {
 .error {
   font-weight: bold;
   color: red;
+}
+
+.VideoPreview {
+  width: 100%;
+  height: 100%;
 }
 </style>
