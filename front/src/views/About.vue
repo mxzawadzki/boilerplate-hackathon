@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <AppTutorial />
+    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
   </div>
 </template>
 
@@ -10,6 +10,16 @@ export default {
   name: 'home',
   components: {
     AppTutorial
+  },
+  data() {
+    return {
+      tutorial: true
+    }
+  },
+  methods: {
+    closeTutorial() {
+      this.tutorial = false;
+    }
   }
 }
 </script>

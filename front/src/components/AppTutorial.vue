@@ -20,7 +20,7 @@
               <img class="slider__img" :src="slide.img">
               <p class="slider__number">{{ i + 1 }}</p>
               <p class="slider__text">{{slide.text}}</p>
-              <button v-if="i === 3">Do dzieła!</button>
+              <button v-if="i === 3" @click="closeTutorial">Do dzieła!</button>
             </div>
           </v-row>
         </v-sheet>
@@ -58,6 +58,11 @@ data () {
     ],
   }
 },
+methods: {
+  closeTutorial() {
+    this.$emit('closeTutorial')
+  }
+}
 }
 </script>
 
