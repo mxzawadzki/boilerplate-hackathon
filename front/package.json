@@ -12,6 +12,7 @@
     "firebase": "^7.1.0",
     "leaflet": "^1.5.1",
     "vue": "^2.6.10",
+    "vue-qrcode-reader": "^2.1.0",
     "vue-router": "^3.0.3",
     "vue2-leaflet": "^2.2.1",
     "vuex": "^3.0.1"
