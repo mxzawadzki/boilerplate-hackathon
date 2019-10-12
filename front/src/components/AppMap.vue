@@ -8,41 +8,33 @@
       @update:bounds="boundsUpdated"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <!-- <l-marker :lat-lng="markerLatLng" ></l-marker> -->
-      <!-- <l-marker :lat-lng="[47.413220, -1.189482]">
+      <l-marker v-for="marker in markers" :key="marker.id" @click="showPopup" :lat-lng="marker.geometry.coordinates">
+        <l-popup>{{marker.properties.popupContent}}</l-popup>
         <l-icon
           :icon-anchor="staticAnchor"
           class-name="someExtraClass">
           <div class="headline">{{ customText }}</div>
           <img src="static/images/layers.png">
         </l-icon>
-      </l-marker> -->
-      <l-geo-json v-for="marker in markers" :key="marker.id" @click="showPopup"
-        :geojson="marker"
-        :options="options"
-        :options-style="styleFunction"
-      >
-      </l-geo-json>
+      </l-marker>
     </l-map>
 </template>
 
 <script>
-import {LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet'
+import {LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
 export default {
   name: 'AppMap',
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LGeoJson
+    LPopup
   },
   data () {
     return {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       zoom: 3,
       center: [52.2297, 21.0122],
-      // markerLatLng: [52.2297, 21.0122],
-      geojson: null,
       markers: [
         {
           "type": "Feature",
@@ -53,7 +45,19 @@ export default {
           },
           "geometry": {
             "type": "Point",
-            "coordinates": [21.0122, 52.2297]
+            "coordinates": [52.2297, 21.0122]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Coors Field",
+            "amenity": "Baseball Stadium",
+            "popupContent": "This is where the Rockies play!"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [51.2297, 20.0122]
           }
         }
       ]
