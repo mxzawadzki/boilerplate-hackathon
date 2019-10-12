@@ -25,8 +25,8 @@ export default {
     return {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       zoom: 3,
-      center: [47.413220, -1.219482],
-      markerLatLng: [47.313220, -1.319482]
+      center: [52.2297, 21.0122],
+      markerLatLng: [52.2297, 21.0122]
     }
   },
   methods: {
