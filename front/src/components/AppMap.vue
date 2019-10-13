@@ -16,8 +16,8 @@
       <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
         <l-popup>
           <p class="marker__text">{{marker.properties.popupContent}}</p>
-          <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Link</a>
-          <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Link</a>
+          <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a>
+          <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Znajdź drogę <v-icon  color="#fbc02d">mdi-google-maps</v-icon></a>
         </l-popup>
         <!-- <l-icon
           :icon-anchor="staticAnchor"
@@ -63,7 +63,7 @@ export default {
       zoom: 16,
       center: [52.2297, 21.0122],
       // baseUrl: 'https://www.google.pl/maps/place/',
-      baseUrl: "https://www.google.com/maps/dir/?api=1&origin=",
+      baseUrl: "https://www.google.com/maps/dir/?api=1",
       markers: [
         {
           type: "Feature",
@@ -174,9 +174,55 @@ export default {
 .leaflet-marker-icon {
   position: relative;
 }
+
+.leaflet-popup-content-wrapper {
+    border-radius: 4px !important;
+    overflow: hidden;
+}
+.leaflet-popup-content {
+    margin: 20px 30px !important;
+    line-height: 1.5 !important;
+    position: relative;
+    z-index: 1;
+}
+
+.leaflet-popup-close-button {
+  color: #333 !important;
+  padding: 11px 24px 0 0 !important;
+}
+
+.leaflet-popup-content p::before {
+  content: "WZB";
+  position: absolute;
+  top: -57px;
+  left: -58px;
+  font-family: "Monoton";
+  font-size: 5rem;
+  opacity: 0.028;
+  z-index: -1;
+}
+
 .marker {
   &__text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__link {
     font-size: 1rem;
+    text-decoration: none;
+    color: #333 !important;
+    display: block;
+    text-align: right;
+    text-transform: uppercase;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
   }
 
   &__headline {

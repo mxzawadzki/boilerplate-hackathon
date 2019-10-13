@@ -129,6 +129,7 @@ methods: {
     bottom: -2rem;
     left: 3rem;
     text-align: right;
+    line-height: 1.5;
   }
 
   &__button {

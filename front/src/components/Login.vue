@@ -1,38 +1,60 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-card class="elevation-12">
-          <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Login form</v-toolbar-title>
-            <div class="flex-grow-1"></div>
-          </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-text-field label="Login" name="login" prepend-icon="mdi-account" type="text"></v-text-field>
+  <div>
+    <v-toolbar color="primary" dark flat>
+      <v-toolbar-title>Login form</v-toolbar-title>
+      <div class="flex-grow-1"></div>
+    </v-toolbar>
+    <v-card-text>
+      <v-form @submit="login">
+        <v-text-field
+          @keydown.enter="login"
+          label="Email"
+          name="email"
+          v-model="computedLoginData.email"
+          prepend-icon="mdi-account"
+          type="text"
+        ></v-text-field>
 
-              <v-text-field
-                id="password"
-                label="Password"
-                name="password"
-                prepend-icon="mdi-lock"
-                type="password"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <div class="flex-grow-1"></div>
-            <v-btn color="primary">Login</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        <v-text-field
+          @keydown.enter="login"
+          id="password"
+          label="Password"
+          name="password"
+          v-model="computedLoginData.password"
+          prepend-icon="mdi-lock"
+          type="password"
+        ></v-text-field>
+      </v-form>
+    </v-card-text>
+    <v-card-actions>
+      <div class="flex-grow-1"></div>
+      <v-btn color="blue darken-1" text @click="login">Login</v-btn>
+    </v-card-actions>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["loginData"],
+  computed: {
+    computedLoginData: {
+      get() {
+        return this.loginData;
+      },
+      set(v) {
+        this.$emit("update:loginData", v);
+      }
+    }
+  },
+  methods: {
+    submit() {
+      this.$emit("login");
+    },
+    login() {
+      this.$emit("login");
+    }
+  }
+};
 </script>
 
-<style>
-</style>
+<style></style>

@@ -48,7 +48,4 @@ export default {
   }
 }
 
-h1 {
-  color: #fff;
-}
 </style>
