@@ -11,23 +11,20 @@ class QrController extends Controller
 {
     public function verify(VerifyQRRequest $request)
     {
+        /** @var User $user */
         $user = auth()->user();
 
-        $qr = Qr::where("string", "like", $request->string)->get();
+        $qr = Qr::where("string", "like", $request->string)->get()->first();
 
-        $QR = $qr->first();
+        $points = $qr ? $qr->points : -1;
 
-        $points = $QR ? $QR->points : -1;
-
-        if($user){
-            if ($points>=0){
-                $user->score+=$points;
-                $user->save();
-            }
+        if ($points >= 0) {
+            $user->score += $points;
+            $user->save();
         }
 
         return response()->json([
-            "valid" => $QR !== null,
+            "valid" => $qr !== null,
             "points" => $points,
         ]);
     }
