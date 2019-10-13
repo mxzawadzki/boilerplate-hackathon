@@ -17,6 +17,7 @@
 
 <script>
 import { QrcodeStream } from "vue-qrcode-reader";
+import { verifyString } from "@/utils/api.js";
 
 export default {
   components: { QrcodeStream },
@@ -30,7 +31,10 @@ export default {
 
   methods: {
     onDecode(result) {
-      this.result = result;
+      verifyString(result).then(data => {
+        console.log(data);
+      });
+      this.$emit("closeScannerModal");
     },
 
     async onInit(promise) {

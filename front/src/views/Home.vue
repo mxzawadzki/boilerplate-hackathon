@@ -15,7 +15,7 @@
           </v-btn>
         </template>
         <v-card>
-          <Scanner />
+          <Scanner @closeScannerModal="scannerModal = false" />
           <v-card-actions>
             <div class="flex-grow-1"></div>
             <v-btn color="green darken-1" text @click="scannerModal = false"
@@ -43,7 +43,12 @@ export default {
   },
   data() {
     return {
-      scannerModal: false
+      scannerModal: false,
+      user: {
+        username: "Example",
+        email: "example@example.com",
+        score: 1536
+      }
     };
   }
 };

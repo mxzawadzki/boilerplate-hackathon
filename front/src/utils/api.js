@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://ec2-34-249-95-148.eu-west-1.compute.amazonaws.com/api/";
+const API_URL = "https://api.adambuczek.com/api/";
 
 /**
  * @example for param bounds
@@ -22,14 +22,25 @@ export const getPointsForBounds = bounds => {
    * Prepare map bounds for api consumption
    */
   const { _southWest, _northEast } = bounds;
-  const preparedBounds = {
+  const data = {
     boundaries: [
       [_southWest.lat, _southWest.lng],
       [_northEast.lat, _northEast.lng]
     ]
   };
   return axios
-    .post(`${API_URL}miejsca/w-obszarze`, preparedBounds)
+    .post(`${API_URL}miejsca/w-obszarze`, data)
+    .then(response => response.data);
+};
+
+/**
+ * Verify decoded QR
+ * @param {*} string
+ */
+export const verifyString = string => {
+  const data = { string };
+  return axios
+    .post(`${API_URL}qry/zweryfikuj`, data)
     .then(response => response.data);
 };
 
