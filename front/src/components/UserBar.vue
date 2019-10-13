@@ -30,7 +30,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
 <style lang="scss">
 .userbar {
   display: flex;
@@ -48,8 +47,6 @@ export default {
     }
   }
 }
-=======
 <style>
->>>>>>> master
 
 </style>
