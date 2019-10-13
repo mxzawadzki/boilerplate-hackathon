@@ -3,3 +3,4 @@
 <li class=nav-item><a class=nav-link href="{{ backpack_url('elfinder') }}"><i class="nav-icon fa fa-files-o"></i> <span>{{ trans('backpack::crud.file_manager') }}</span></a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('place') }}'><i class='nav-icon fa fa-question'></i> Places</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('qr') }}'><i class='nav-icon fa fa-question'></i> Qrs</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon fa fa-question'></i> Users</a></li>
