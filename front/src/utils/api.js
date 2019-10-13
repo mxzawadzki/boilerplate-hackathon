@@ -30,10 +30,7 @@ export const getPointsForBounds = bounds => {
   };
   return axios
     .post(`${API_URL}miejsca/w-obszarze`, data)
-    .then(response => response.data)
-    .catch(error => {
-      console.error(error);
-    });
+    .then(response => response.data);
 };
 
 /**
@@ -67,25 +64,17 @@ export const login = ({ email, password }) => {
     .then(data => {
       localStorage.setItem("authToken", data.token);
       return data;
-    })
-    .catch(error => {
-      console.error(error);
     });
 };
 
 export const getUser = () => {
   const api_token = localStorage.getItem("authToken");
-  return axios
-    .get(`${API_URL}user?api_token=${api_token}`)
-    .then(response => {
-      if (response.status === 401) {
-        localStorage.removeItem("authToken");
-      }
-      return response.data;
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  return axios.get(`${API_URL}user?api_token=${api_token}`).then(response => {
+    if (response.status === 401) {
+      localStorage.removeItem("authToken");
+    }
+    return response.data;
+  });
 };
 
 export const isLoggedIn = () => {

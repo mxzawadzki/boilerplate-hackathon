@@ -1,6 +1,5 @@
 <template>
   <div id="home">
-    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
     <AppMap />
 
     <!-- logged in user -->
@@ -39,6 +38,7 @@
 
     <!-- anonymous user -->
     <template v-else>
+      <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
       <div class="login-wrapper over-map">
         <v-row justify="center">
           <v-dialog v-model="loginModal" class="over-map" max-width="640">
@@ -52,7 +52,7 @@
             <v-card>
               <Login
                 :loginData.sync="loginData"
-                @login="login"8
+                @login="login"
                 :loading="loading"
               />
             </v-card>
