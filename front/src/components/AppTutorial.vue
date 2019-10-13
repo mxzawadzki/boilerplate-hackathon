@@ -156,6 +156,18 @@ methods: {
     min-width: 680px;
     width: auto;
 
+    &__text {
+      font-size: 3rem;
+    }
+
+    &__title {
+      font-size: 3rem;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem !important;
+    }
+
     &__button {
     height: 4rem !important;
     width: 15rem !important;
