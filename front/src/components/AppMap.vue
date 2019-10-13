@@ -13,19 +13,26 @@
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
-        <l-popup>
-          <p class="marker__text">{{marker.properties.popupContent}}</p>
-          <a class="marker__link" :href="baseUrl + setCoords(marker.geometry.coordinates)">Link</a>
-        </l-popup>
-        <l-icon
+    <l-marker
+      v-for="marker in markers"
+      :key="marker.id"
+      :lat-lng="marker.geometry.coordinates"
+      @click="showPopup"
+    >
+      <l-popup>
+        <p class="marker__text">{{marker.properties.popupContent}}</p>
+        <a
+          class="marker__link"
+          :href="baseUrl + origin + '&destination=' + setCoords(marker.geometry.coordinates)"
+        >Link</a>
+      </l-popup>
+      <!-- <l-icon
           :icon-anchor="staticAnchor"
           class="marker__icon"
-          class-name="someExtraClass">
-          <div class="headline">{{ customText }}</div>
-          <img src="@/assets/img/bottle.png" />
-        </l-icon>
-      </l-marker>
+      class-name="someExtraClass">-->
+      <!-- <div class="headline marker__headline"><p>{{ customText }}</p></div> -->
+      <!-- <img src="@/assets/img/bottle.png"> -->
+      <!-- </l-icon> -->
     </l-marker>
   </l-map>
 </template>
@@ -168,13 +175,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<style>
-</style>
-=======
->>>>>>> origin/f/auth
 <style lang="scss">
 .leaflet-marker-icon {
   position: relative;
@@ -189,7 +189,3 @@ export default {
   }
 }
 </style>
-<<<<<<< HEAD
-=======
->>>>>>> c1a849f208791206618cd7ad1cdfdc3f10fbed95
->>>>>>> origin/f/auth

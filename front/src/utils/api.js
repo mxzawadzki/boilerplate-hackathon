@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from "axios";
 
-const API_URL = 'http://ec2-34-249-95-148.eu-west-1.compute.amazonaws.com/api/'
+const API_URL = "http://ec2-34-249-95-148.eu-west-1.compute.amazonaws.com/api/";
 
 /**
  * @example for param bounds
@@ -17,20 +17,20 @@ const API_URL = 'http://ec2-34-249-95-148.eu-west-1.compute.amazonaws.com/api/'
  *
  *
  */
-export const getPointsForBounds = (bounds) => {
+export const getPointsForBounds = bounds => {
   /**
-     * Prepare map bounds for api consumption
-     */
-  const { _southWest, _northEast } = bounds
+   * Prepare map bounds for api consumption
+   */
+  const { _southWest, _northEast } = bounds;
   const preparedBounds = {
     boundaries: [
       [_southWest.lat, _southWest.lng],
-      [_northEast.lat, _northEast.lng],
-    ],
-  }
+      [_northEast.lat, _northEast.lng]
+    ]
+  };
   return axios
     .post(`${API_URL}miejsca/w-obszarze`, preparedBounds)
-    .then((response) => response.data)
-}
+    .then(response => response.data);
+};
 
 /** */

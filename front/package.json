@@ -1,63 +1,38 @@
 {
-    "name": "front",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
-    },
-    "dependencies": {
-        "axios": "^0.19.0",
-        "core-js": "^2.6.5",
-        "leaflet": "^1.5.1",
-        "sass": "^1.22.10",
-        "qrcode": "^1.4.2",
-        "sass-loader": "^7.0.0",
-        "vue": "^2.6.10",
-        "vue-qrcode-reader": "^2.1.0",
-        "vue-router": "^3.0.3",
-        "vue2-leaflet": "^2.2.1",
-        "vuetify": "^2.1.3",
-        "vuetify-loader": "^1.3.0",
-        "vuex": "^3.0.1"
-    },
-    "devDependencies": {
-        "@vue/cli-plugin-babel": "^3.11.0",
-        "@vue/cli-plugin-eslint": "^3.11.0",
-        "@vue/cli-service": "^3.11.0",
-        "babel-eslint": "^10.0.1",
-        "node-sass": "^4.9.0",
-        "sass-loader": "^7.1.0",
-        "eslint": "^6.5.1",
-        "eslint-config-airbnb-base": "^14.0.0",
-        "eslint-plugin-import": "^2.18.2",
-        "eslint-plugin-vue": "^5.2.3",
-        "vue-template-compiler": "^2.6.10",
-        "vue-cli-plugin-vuetify": "^0.6.3",
-        "vuetify-loader": "^1.2.2"
-    },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "rules": {},
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
-    "postcss": {
-        "plugins": {
-            "autoprefixer": {}
-        }
-    },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions"
-    ]
+  "name": "vuetify-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "axios": "^0.19.0",
+    "core-js": "^2.6.5",
+    "leaflet": "^1.5.1",
+    "register-service-worker": "^1.6.2",
+    "vue": "^2.6.10",
+    "vue-qrcode-reader": "^2.1.0",
+    "vue-router": "^3.0.3",
+    "vue2-leaflet": "^2.2.1",
+    "vuetify": "^2.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.12.0",
+    "@vue/cli-plugin-eslint": "^3.12.0",
+    "@vue/cli-plugin-pwa": "^3.12.0",
+    "@vue/cli-service": "^3.12.0",
+    "@vue/eslint-config-prettier": "^5.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "prettier": "^1.18.2",
+    "sass": "^1.19.0",
+    "sass-loader": "^7",
+    "vue-cli-plugin-vuetify": "^1.0.1",
+    "vue-template-compiler": "^2.6.10"
+  }
 }
