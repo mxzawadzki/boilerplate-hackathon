@@ -23,15 +23,28 @@ class PlacesTableSeeder extends Seeder
             $coordinates = $point['geometry']["coordinates"];
 
             Place::create([
-                'name' => $properties['name'],
-                'amenity' => $properties['amenity'],
-                'popup_content' => $properties['popupContent'],
+                "name" => $properties['name'],
+                "amenity" => $properties['amenity'],
+                "popup_content" => $properties['popupContent'],
                 "lat" => $coordinates[0],
                 "lng" => $coordinates[1],
                 "address" => "Temp address",
                 "open_week_at" => "open_week_at",
                 "open_weekend_at" => "open_weekend_at",
+                "api_token" => Str::random(60),
             ]);
         }
+
+        Place::create([
+            "name" => "Startberry",
+            "amenity" => "2 piętro",
+            "popup_content" => "Za darmo to biorę",
+            "lat" => 52.246803,
+            "lng" => 21.063160,
+            "address" => "Grochowska 306/308",
+            "open_week_at" => "00:00 - 24:00",
+            "open_weekend_at" => "00:00 - 24:00",
+            "api_token" => "jf4WSD36OfhcN4114csvphqeYDeBcvKknZTv927uudBck5Cklnusw8FexI6t",
+        ]);
     }
 }

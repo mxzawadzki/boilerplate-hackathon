@@ -26,7 +26,9 @@ Route::get('/social/{provider}/callback', 'AuthController@handleProviderCallback
 Route::middleware('auth:api')->name('api.')->group(function(){
 
     Route::name('qr.')->prefix('qry')->group(function(){
-        Route::post('/wygeneruj','QrController@generate')->name('generate');
+        Route::middleware('machine')->group(function(){
+            Route::post('/wygeneruj','QrController@generate')->name('generate');
+        });
         Route::post('/zweryfikuj','QrController@verify')->name('verify');
     });
 
