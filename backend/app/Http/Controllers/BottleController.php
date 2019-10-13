@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Resource\BottleResource;
+use App\Http\Resource\BottleResource;
 use App\Bottle;
 
 class BottleController extends Controller
