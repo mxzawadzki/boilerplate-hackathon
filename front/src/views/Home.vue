@@ -44,13 +44,17 @@
           <v-dialog v-model="loginModal" class="over-map" max-width="640">
             <template v-slot:activator="{ on }">
               <div class="login-wrapper over-map">
-                <v-btn color="primary" v-on="on" dark>
+                <v-btn color="primary" v-on="on" dark :loading="loading">
                   Login
                 </v-btn>
               </div>
             </template>
             <v-card>
-              <Login :loginData.sync="loginData" @login="login" />
+              <Login
+                :loginData.sync="loginData"
+                @login="login"8
+                :loading="loading"
+              />
             </v-card>
           </v-dialog>
         </v-row>
@@ -64,7 +68,6 @@
 // @ is an alias to /src
 import AppMap from "@/components/AppMap.vue";
 import AppTutorial from "@/components/AppTutorial.vue";
-import UserBar from "@/components/UserBar.vue";
 import Scanner from "@/components/Scanner.vue";
 import Profile from "@/components/Profile.vue";
 import Login from "@/components/Login.vue";
@@ -122,14 +125,20 @@ export default {
     async login() {
       this.loading = true;
       const { email, password } = this.loginData;
-      await login({ email, password });
-      const userData = await getUser();
-      this.user = {
-        name: userData.name,
-        email: userData.email,
-        score: userData.score
-      };
-      this.loading = false;
+      try {
+        await login({ email, password });
+        const userData = await getUser();
+        this.user = {
+          name: userData.name,
+          email: userData.email,
+          score: userData.score
+        };
+        this.loginModal = false;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
     },
     logout() {
       this.user = null;
