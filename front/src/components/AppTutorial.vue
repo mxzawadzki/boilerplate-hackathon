@@ -2,7 +2,7 @@
 <div class="slider">
     <v-carousel
     height="500"
-    :show-arrows="false"
+    :show-arrows="true"
     >
       <v-carousel-item
         v-for="(slide, i) in slides"
@@ -70,6 +70,9 @@ data () {
 methods: {
   closeTutorial() {
     this.$emit('closeTutorial')
+  },
+  openTutorial() {
+    this.$emit('openTutorial')
   }
 }
 }
@@ -155,6 +158,18 @@ methods: {
   .slider {
     min-width: 680px;
     width: auto;
+
+    &__text {
+      font-size: 3rem;
+    }
+
+    &__title {
+      font-size: 3rem;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem !important;
+    }
 
     &__button {
     height: 4rem !important;
