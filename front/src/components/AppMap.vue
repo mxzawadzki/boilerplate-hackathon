@@ -168,6 +168,7 @@ export default {
     boundsUpdated(bounds) {
       getPointsForBounds(bounds).then(markers => {
         this.markers = markers;
+        console.log(markers, 'markers')
       });
       this.bounds = bounds;
     }
@@ -182,6 +183,7 @@ export default {
 .leaflet-marker-icon {
   position: relative;
 }
+
 .leaflet-popup-content-wrapper {
     border-radius: 4px !important;
     overflow: hidden;
@@ -208,6 +210,7 @@ export default {
   opacity: 0.028;
   z-index: -1;
 }
+
 .marker {
   &__icon {
     position: relative;
@@ -224,6 +227,7 @@ export default {
     position: relative;
     z-index: 1;
   }
+
   &__link {
     font-size: 1rem;
     text-decoration: none;

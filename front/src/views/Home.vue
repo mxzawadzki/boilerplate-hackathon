@@ -59,7 +59,7 @@
                 <v-btn color="primary" v-on="on" dark :loading="loading">
                   Login
                 </v-btn>
-                <v-btn class="mx-2" color="primary" @click="showTutorial" dark>
+                <v-btn class="mx-2" color="primary" @click="toggleTutorial" dark>
                   Help
                 </v-btn>
               </div>
@@ -132,6 +132,9 @@ export default {
     },
     showTutorial() {
       this.tutorial = true;
+    },
+    toggleTutorial() {
+      this.tutorial = !this.tutorial;
     },
     addPoints(points) {
       this.user = {
