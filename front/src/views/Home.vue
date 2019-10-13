@@ -11,9 +11,10 @@
               color="primary"
               v-on="on"
               class="scanner-button over-map"
-              x-large
+              large
+              fab
             >
-              Open Code Scanner
+             <v-icon>mdi-qrcode</v-icon>
             </v-btn>
           </template>
           <v-card>
@@ -157,8 +158,8 @@ export default {
 }
 .scanner-button {
   position: fixed !important;
-  bottom: 40px;
-  /* right: 40px; */
+  top: 10px;
+  right: 10px;
 }
 .profile-wrapper {
   position: fixed;
