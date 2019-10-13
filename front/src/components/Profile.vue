@@ -1,30 +1,39 @@
 <template>
+
   <v-card class="Profile">
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline">{{ user.name }}</v-list-item-title>
-        <v-list-item-subtitle>Lvl. {{ currentLevel }}</v-list-item-subtitle>
-        <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-    <v-card-text>
-      <v-progress-linear
+    <v-btn
+      color="blue darken-1"
+      text
+      @click="$emit('logout')"
+    >
+     <v-icon>mdi-logout</v-icon>
+    </v-btn>
+    <h2 class="headline">
+      {{ user.name }}
+      <small>
+        {{ user.email }}
+      </small>
+    </h2>
+
+    <v-card-text class="mobile-in-row">
+        <v-progress-circular class="hide-desktop" :value="scorePercent"></v-progress-circular>
+      <v-progress-linear class="show-desktop"
         striped
         :value="scorePercent"
-        height="40"
+        height="10"
       ></v-progress-linear>
-      <v-row>
-        <v-col class="text-left">{{ user.score }}</v-col>
-        <v-col class="text-right">{{ neededForNextLevel }}</v-col>
+      <v-row class="mobile-column">
+        <v-col class="no-padding-bottom no-padding-mobile text-left">{{ user.score }}</v-col>
+        <v-col class="no-padding-bottom no-padding-mobile text-center"> Lvl. {{ currentLevel }}</v-col>
+        <v-col class="no-padding-bottom no-padding-mobile text-right">{{ neededForNextLevel }}</v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions>
-      <div class="flex-grow-1"></div>
-      <v-btn color="blue darken-1" text @click="$emit('logout')">
-        Logout
-      </v-btn>
-    </v-card-actions>
+    <!-- <v-card-actions>
+        <div class="flex-grow-1"></div>
+
+      </v-card-actions> -->
   </v-card>
+
 </template>
 
 <script>
@@ -55,7 +64,77 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .Profile {
+  display: flex !important;
+  align-items: center;
+}
+
+.headline small {
+  display: block;
+
+  font-size: 12px;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2 !important;
+  padding: 5px;
+  text-align: left;
+  vertical-align: middle;
+  min-width: 200px;
+  font-size: 15px !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.hide-desktop {
+  display: block !important;
+  @media (min-width: 560px) {
+    display: none !important;
+  }
+ 
+}
+
+.no-padding-mobile {
+  @media (max-width: 559px) {
+  padding: 0 0 0 0 !important;
+  }
+}
+
+
+
+
+
+
+.Profile .mobile-column {
+  @media (max-width: 559px) {
+    flex-direction: column;
+    padding: 0 0 0 0 !important;
+     .text-left, .text-center, .text-right {
+
+    text-align: right !important;
+    padding: 0 5px !important;
+    }
+  }
+}
+
+.Profile .mobile-in-row {
+  @media (max-width: 559px) {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+  }
+}
+
+.show-desktop {
+  display: none !important;
+  @media (min-width: 560px) {
+    display: block !important;
+  }
 }
 </style>
