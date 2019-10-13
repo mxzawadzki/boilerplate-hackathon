@@ -22,7 +22,7 @@ class QRTest extends TestCase
 //        dd(factory(Machine::class));
         $machine = factory(Machine::class,1)->create()->first();
 
-        $this->actingAs($machine, 'api')->post("api/qry/wygeneruj", ['points' => 13,'api_token'=>$machine->api_token])
+        $this->actingAs($user, 'api')->post("api/qry/wygeneruj", ['points' => 13,'api_token'=>$machine->api_token])
             ->assertJson(["string"=>Qr::first()->string]);
 
         $this->assertTrue(Qr::first()->points === 13);

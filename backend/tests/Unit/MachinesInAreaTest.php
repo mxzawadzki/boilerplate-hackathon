@@ -17,34 +17,34 @@ class MachinesInAreaTest extends TestCase
      */
     public function testExample()
     {
-        $place1 = factory(Machine::class,1)->create()->first();
+        $machine1 = factory(Machine::class,1)->create()->first();
 
-        $place1->lat = 0.5;
-        $place1->lng = 0.5;
+        $machine1->lat = 0.500000;
+        $machine1->lng = 0.500000;
 
-        $place1->save;
+        $machine1->save();
 
-        $place2 = factory(Machine::class,1)->create()->first();
+        $machine2 = factory(Machine::class,1)->create()->first();
 
-        $place2->lat = -0.5;
-        $place2->lng = -0.5;
+        $machine2->lat = -0.500000;
+        $machine2->lng = -0.500000;
 
-        $place2->save;
+        $machine2->save();
 
 
-        $this->area([[0, 0], [1, 1]], MachineResource::collection(collect([$place1])));
+        $this->area([[0, 0], [1, 1]], MachineResource::collection(collect([$machine1])));
         $this->area([[0, 0], [0.4, 0.4]], MachineResource::collection(collect([])));
-        $this->area([[0, 0], [0.5, 0.5]], MachineResource::collection(collect([$place1])));
+        $this->area([[0, 0], [0.5, 0.5]], MachineResource::collection(collect([$machine1])));
 
-        $this->area([[-1, -1], [0, 0]], MachineResource::collection(collect([$place2])));
+        $this->area([[-1, -1], [0, 0]], MachineResource::collection(collect([$machine2])));
         $this->area([[-0.4, -0.4], [0, 0]], MachineResource::collection(collect([])));
-        $this->area([[-0.5, -0.5], [0, 0]], MachineResource::collection(collect([$place2])));
+        $this->area([[-0.5, -0.5], [0, 0]], MachineResource::collection(collect([$machine2])));
 
 
-        $this->area([[-0.5, -0.5], [0.5, 0.5]], MachineResource::collection(collect([$place1, $place2])));
+        $this->area([[-0.5, -0.5], [0.5, 0.5]], MachineResource::collection(collect([$machine1, $machine2])));
 
-        $place1->delete();
-        $place2->delete();
+        $machine1->delete();
+        $machine2->delete();
 
     }
 
