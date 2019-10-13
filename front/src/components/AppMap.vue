@@ -225,6 +225,7 @@ export default {
 }
 
 .leaflet-popup-close-button {
+  z-index: 1001;
   color: #333 !important;
   padding: 11px 24px 0 0 !important;
 }
