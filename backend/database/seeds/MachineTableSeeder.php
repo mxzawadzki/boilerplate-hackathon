@@ -1,9 +1,9 @@
 <?php
 
-use App\Place;
+use App\Machine;
 use Illuminate\Database\Seeder;
 
-class PlacesTableSeeder extends Seeder
+class MachineTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class PlacesTableSeeder extends Seeder
             $properties = $point['properties'];
             $coordinates = $point['geometry']["coordinates"];
 
-            Place::create([
+            Machine::create([
                 "name" => $properties['name'],
                 "amenity" => $properties['amenity'],
                 "popup_content" => $properties['popupContent'],
@@ -35,7 +35,7 @@ class PlacesTableSeeder extends Seeder
             ]);
         }
 
-        Place::create([
+        Machine::create([
             "name" => "Startberry",
             "amenity" => "2 piętro",
             "popup_content" => "Za darmo to biorę",

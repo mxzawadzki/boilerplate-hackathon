@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Http\Resources\PlaceResource;
-use App\Place;
+use App\Http\Resources\MachineResource;
+use App\Machine;
 use App\User;
 use Tests\TestCase;
 
-class PlaceInAreaTest extends TestCase
+class MachinesInAreaTest extends TestCase
 {
     /**
      * A basic unit test example.
@@ -16,7 +16,7 @@ class PlaceInAreaTest extends TestCase
      */
     public function testExample()
     {
-        $place1 = Place::create([
+        $place1 = Machine::create([
             "popup_content" => "popup_content",
             "amenity" => "amenity",
             "name" => "Punkt 1",
@@ -27,7 +27,7 @@ class PlaceInAreaTest extends TestCase
             "lng" => 0.500000,
         ]);
 
-        $place2 = Place::create([
+        $place2 = Machine::create([
             "popup_content" => "popup_content",
             "amenity" => "amenity",
             "name" => "Punkt 2",
@@ -39,16 +39,16 @@ class PlaceInAreaTest extends TestCase
         ]);
 
 
-        $this->area([[0, 0], [1, 1]], PlaceResource::collection(collect([$place1])));
-        $this->area([[0, 0], [0.4, 0.4]], PlaceResource::collection(collect([])));
-        $this->area([[0, 0], [0.5, 0.5]], PlaceResource::collection(collect([$place1])));
+        $this->area([[0, 0], [1, 1]], MachineResource::collection(collect([$place1])));
+        $this->area([[0, 0], [0.4, 0.4]], MachineResource::collection(collect([])));
+        $this->area([[0, 0], [0.5, 0.5]], MachineResource::collection(collect([$place1])));
 
-        $this->area([[-1, -1], [0, 0]], PlaceResource::collection(collect([$place2])));
-        $this->area([[-0.4, -0.4], [0, 0]], PlaceResource::collection(collect([])));
-        $this->area([[-0.5, -0.5], [0, 0]], PlaceResource::collection(collect([$place2])));
+        $this->area([[-1, -1], [0, 0]], MachineResource::collection(collect([$place2])));
+        $this->area([[-0.4, -0.4], [0, 0]], MachineResource::collection(collect([])));
+        $this->area([[-0.5, -0.5], [0, 0]], MachineResource::collection(collect([$place2])));
 
 
-        $this->area([[-0.5, -0.5], [0.5, 0.5]], PlaceResource::collection(collect([$place1, $place2])));
+        $this->area([[-0.5, -0.5], [0.5, 0.5]], MachineResource::collection(collect([$place1, $place2])));
 
         $place1->delete();
         $place2->delete();
