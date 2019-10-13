@@ -1,9 +1,11 @@
 <template>
 <div class="slider">
     <v-carousel
+    class="slider__carousel"
     height="500"
     :show-arrows="true"
     >
+      <v-icon large color="rgba(0, 0, 0, .3)" class="slider__close" @click="closeTutorial">mdi-close</v-icon>
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="slide.color"
@@ -86,6 +88,18 @@ methods: {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &__carousel {
+    position: relative;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    margin: .5rem;
+  }
 
   &__number {
     font-size: 25rem;
