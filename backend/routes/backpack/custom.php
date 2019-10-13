@@ -11,7 +11,6 @@ Route::group([
     'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-    Route::crud('place', 'PlaceCrudController');
     Route::crud('qr', 'QrCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('bottle', 'BottleCrudController');

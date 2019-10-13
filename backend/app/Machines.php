@@ -36,7 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Machines extends Model
 {
-    protected $table = 'places';
+//    protected $table = 'places';
 
     protected $fillable =[
         "popup_content",
