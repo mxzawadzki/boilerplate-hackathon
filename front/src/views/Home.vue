@@ -57,10 +57,10 @@
             <template v-slot:activator="{ on }">
               <div class="login-wrapper over-map">
                 <v-btn color="primary" v-on="on" dark :loading="loading">
-                  Login
+                  Zaloguj
                 </v-btn>
                 <v-btn class="mx-2" color="primary" @click="toggleTutorial" dark>
-                  Help
+                  Pomoc
                 </v-btn>
               </div>
             </template>

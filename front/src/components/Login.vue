@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-toolbar color="primary" dark flat>
+    <!-- <v-toolbar color="primary" dark flat>
       <v-toolbar-title>Login form</v-toolbar-title>
       <div class="flex-grow-1"></div>
-    </v-toolbar>
+    </v-toolbar> -->
     <v-card-text>
       <v-form @submit="login">
         <v-text-field
@@ -18,7 +18,7 @@
         <v-text-field
           @keydown.enter="login"
           id="password"
-          label="Password"
+          label="Hasło"
           name="password"
           v-model="computedLoginData.password"
           prepend-icon="mdi-lock"
@@ -29,7 +29,7 @@
     <v-card-actions>
       <div class="flex-grow-1"></div>
       <v-btn color="blue darken-1" text @click="login" :loading="loading"
-        >Login</v-btn
+        >Zaloguj</v-btn
       >
     </v-card-actions>
   </div>

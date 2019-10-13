@@ -13,12 +13,41 @@
         <v-icon class="marker__icon">mdi-account</v-icon>
       </l-icon>
     </l-marker>
-      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
-        <l-popup>
-          <p class="marker__text">{{marker.properties.popupContent}}</p>
-          <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a>
-          <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Znajdź drogę <v-icon  color="#fbc02d">mdi-google-maps</v-icon></a>
-        </l-popup>
+    <l-marker
+      v-for="marker in markers"
+      :key="marker.id"
+      :lat-lng="marker.geometry.coordinates"
+      @click="showPopup"
+    >
+      <l-popup>
+        <p class="marker__text">{{ marker.properties.popupContent }}</p>
+        <ul class="marker__list">
+          <li>{{ marker.properties.week_at }}</li>
+          <li>{{ marker.properties.weekend_at }}</li>
+        </ul>
+        <a
+          class="marker__link"
+          target="_blank"
+          :href="
+            baseUrl +
+              '&origin=' +
+              setCoords(user.geometry.coordinates) +
+              '&destination=' +
+              setCoords(marker.geometry.coordinates)
+          "
+          v-if="user.geometry.coordinates"
+          >Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a
+        >
+        <a
+          class="marker__link"
+          target="_blank"
+          :href="
+            baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)
+          "
+          v-else
+          >Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a
+        >
+      </l-popup>
     </l-marker>
   </l-map>
 </template>
@@ -168,7 +197,7 @@ export default {
     boundsUpdated(bounds) {
       getPointsForBounds(bounds).then(markers => {
         this.markers = markers;
-        console.log(markers, 'markers')
+        console.log(markers, "markers");
       });
       this.bounds = bounds;
     }
@@ -185,14 +214,14 @@ export default {
 }
 
 .leaflet-popup-content-wrapper {
-    border-radius: 4px !important;
-    overflow: hidden;
+  border-radius: 4px !important;
+  overflow: hidden;
 }
 .leaflet-popup-content {
-    margin: 20px 30px !important;
-    line-height: 1.5 !important;
-    position: relative;
-    z-index: 1;
+  margin: 20px 30px !important;
+  line-height: 1.5 !important;
+  position: relative;
+  z-index: 1;
 }
 
 .leaflet-popup-close-button {
@@ -235,7 +264,7 @@ export default {
     display: block;
     text-align: right;
     text-transform: uppercase;
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     position: relative;
@@ -244,6 +273,13 @@ export default {
 
   &__headline {
     font-size: 1rem;
+  }
+
+  &__list {
+    list-style: none;
+    text-align: right;
+    padding: 0 !important;
+    margin-bottom: 1rem;
   }
 }
 </style>
