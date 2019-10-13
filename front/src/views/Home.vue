@@ -47,6 +47,9 @@
                 <v-btn color="primary" v-on="on" dark>
                   Login
                 </v-btn>
+                <v-btn class="mx-2" color="primary" @click="showTutorial" dark>
+                  Help
+                </v-btn>
               </div>
             </template>
             <v-card>
