@@ -151,7 +151,12 @@ export default {
   bottom: 40px;
   /* right: 40px; */
 }
-.profile-wrapper,
+.profile-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 .login-wrapper {
   position: fixed;
   top: 10px;
