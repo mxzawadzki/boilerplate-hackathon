@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MachinesInAreaRequest;
 use App\Http\Resources\MachineResource;
-use App\Machines;
+use App\Machine;
 use Illuminate\Http\Request;
 
 class MachineController extends Controller
 {
     /**
-     * returns places in given area
+     * returns mmachines in given area
      * boundaries are ldc and urc
      *
      * @param MachinesInAreaRequest $request
@@ -20,10 +20,10 @@ class MachineController extends Controller
     public function inArea(MachinesInAreaRequest $request){
         $boundaries = $request->boundaries;
 
-        $places = Machines::all()->filter(function (Machines $place) use ($boundaries){
-            return $place->isInArea($boundaries);
+        $machines = Machine::all()->filter(function (Machine $machine) use ($boundaries){
+            return $machine->isInArea($boundaries);
         });
 
-        return response()->json(MachineResource::collection($places));
+        return response()->json(MachineResource::collection($machines));
     }
 }

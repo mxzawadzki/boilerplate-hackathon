@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Machine;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -17,8 +18,11 @@ class QRTest extends TestCase
      */
     public function testExample()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user, 'api')->post("api/qry/wygeneruj", ['points' => 13])
+        $user = factory(User::class,1)->create()->first();
+//        dd(factory(Machine::class));
+        $machine = factory(Machine::class,1)->create()->first();
+
+        $this->actingAs($machine, 'api')->post("api/qry/wygeneruj", ['points' => 13,'api_token'=>$machine->api_token])
             ->assertJson(["string"=>Qr::first()->string]);
 
         $this->assertTrue(Qr::first()->points === 13);
@@ -34,6 +38,7 @@ class QRTest extends TestCase
         Qr::first()->delete();
 
         $user->delete();
+        $machine->delete();
 
     }
 }

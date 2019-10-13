@@ -1,6 +1,6 @@
 <?php
 
-use App\Machines;
+use App\Machine;
 use Illuminate\Database\Seeder;
 
 class MachineTableSeeder extends Seeder
@@ -22,7 +22,7 @@ class MachineTableSeeder extends Seeder
             $properties = $point['properties'];
             $coordinates = $point['geometry']["coordinates"];
 
-            Machines::create([
+            Machine::create([
                 "name" => $properties['name'],
                 "amenity" => $properties['amenity'],
                 "popup_content" => $properties['popupContent'],
@@ -35,7 +35,7 @@ class MachineTableSeeder extends Seeder
             ]);
         }
 
-        Machines::create([
+        Machine::create([
             "name" => "Startberry",
             "amenity" => "2 piętro",
             "popup_content" => "Za darmo to biorę",
