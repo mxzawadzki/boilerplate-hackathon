@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <AppMap @onUserPosition="onUserPosition" :center.sync="mapCenter" />
-
+    <!-- go to my location button -->
     <v-btn
       color="primary"
       @click="goToUserPosition"
@@ -12,6 +12,24 @@
     >
       <v-icon>mdi-crosshairs</v-icon>
     </v-btn>
+    <!-- go to my location button -->
+
+    <!-- got points feedback -->
+    <v-row>
+      <v-dialog v-model="pointsModal" class="over-map" max-width="320">
+        <v-card class="over-map">
+          <v-list-item two-line>
+            <v-list-item-content>
+              <div class="overline mb-4 text-left">Dodano</div>
+              <v-list-item-title class="display-2 mb-1 text-center">
+                {{ lastScore }} pkt.
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-dialog>
+    </v-row>
+    <!-- got points feedback -->
 
     <!-- logged in user -->
     <template v-if="user">
@@ -36,7 +54,7 @@
             <v-card-actions>
               <div class="flex-grow-1"></div>
               <v-btn color="blue darken-1" text @click="scannerModal = false"
-                >Close</v-btn
+                >Zamknij</v-btn
               >
             </v-card-actions>
           </v-card>
@@ -59,7 +77,12 @@
                 <v-btn color="primary" v-on="on" dark :loading="loading">
                   Zaloguj
                 </v-btn>
-                <v-btn class="mx-2" color="primary" @click="toggleTutorial" dark>
+                <v-btn
+                  class="mx-2"
+                  color="primary"
+                  @click="toggleTutorial"
+                  dark
+                >
                   Pomoc
                 </v-btn>
               </div>
@@ -104,8 +127,10 @@ export default {
       loading: false,
       scannerModal: false,
       loginModal: false,
+      pointsModal: false,
       user: null,
       tutorial: true,
+      lastScore: 0,
       userPosition: null,
       loginData: {
         email: "",
@@ -141,6 +166,8 @@ export default {
         ...this.user,
         score: this.user.score + points
       };
+      this.lastScore = points;
+      this.pointsModal = true;
     },
     onUserPosition(coords) {
       this.saveUserPosition(coords);
