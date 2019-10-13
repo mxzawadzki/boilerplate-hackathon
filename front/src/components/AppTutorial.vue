@@ -5,7 +5,7 @@
     height="500"
     :show-arrows="true"
     >
-      <v-icon large color="rgba(0, 0, 0, .3)" class="slider__close" @click="closeTutorial">mdi-close</v-icon>
+      <v-icon large color="rgba(255, 255, 255, .8)" class="slider__close" @click="closeTutorial">mdi-close</v-icon>
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="slide.color"
