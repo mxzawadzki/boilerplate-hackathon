@@ -8,7 +8,11 @@
       </v-list-item-content>
     </v-list-item>
     <v-card-text>
-      <v-progress-linear :value="scorePercent"></v-progress-linear>
+      <v-progress-linear
+        striped
+        :value="scorePercent"
+        height="40"
+      ></v-progress-linear>
       <v-row>
         <v-col class="text-left">{{ user.score }}</v-col>
         <v-col class="text-right">{{ neededForNextLevel }}</v-col>
@@ -45,7 +49,7 @@ export default {
       return this.levelTreshholds.slice().pop();
     },
     currentLevel() {
-      return this.levelTreshholds.indexOf(this.neededForNextLevel)
+      return this.levelTreshholds.indexOf(this.neededForNextLevel);
     }
   }
 };
