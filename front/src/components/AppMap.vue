@@ -1,13 +1,13 @@
 <template>
   <l-map
-      style="height: 100vh; width: 100vw"
-      :zoom="zoom"
-      :center="center"
-      @update:zoom="zoomUpdated"
-      @update:center="centerUpdated"
-      @update:bounds="boundsUpdated"
-    >
-      <l-tile-layer :url="url"></l-tile-layer>
+    style="height: 100vh; width: 100vw"
+    :zoom="zoom"
+    :center="center"
+    @update:zoom="zoomUpdated"
+    @update:center="centerUpdated"
+    @update:bounds="boundsUpdated"
+  >
+    <l-tile-layer :url="url"></l-tile-layer>
     <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
       <l-icon>
         <div class="d">User</div>
@@ -22,18 +22,20 @@
         <!-- <l-icon
           :icon-anchor="staticAnchor"
           class="marker__icon"
-          class-name="someExtraClass"> -->
-          <!-- <div class="headline marker__headline"><p>{{ customText }}</p></div> -->
-          <!-- <img src="@/assets/img/bottle.png"> -->
-        <!-- </l-icon> -->
-      </l-marker>
-    </l-map>
+      class-name="someExtraClass">-->
+      <!-- <div class="headline marker__headline"><p>{{ customText }}</p></div> -->
+      <!-- <img src="@/assets/img/bottle.png"> -->
+      <!-- </l-icon> -->
+    </l-marker>
+  </l-map>
 </template>
 
 <script>
-import {LMap, LTileLayer, LMarker, LPopup, LIcon } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "vue2-leaflet";
+import { getPointsForBounds } from "@/utils/api.js";
+
 export default {
-  name: 'AppMap',
+  name: "AppMap",
   components: {
     LMap,
     LTileLayer,
@@ -41,87 +43,88 @@ export default {
     LPopup,
     LIcon
   },
-  data () {
+  data() {
     return {
-      // fake origin: 
-      origin: '52.183554,21.000471',
+      // fake origin:
+      origin: "52.183554,21.000471",
       userAccept: false,
       user: {
         geometry: {}
       },
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       icon: L.icon({
-        iconUrl: require('@/assets/img/bottle.png'),
+        iconUrl: require("@/assets/img/bottle.png"),
         iconSize: [50, 50],
         iconAnchor: [0, 0]
       }),
       staticAnchor: [0, 0],
-      customText: 'Bottle Drop',
+      customText: "Bottle Drop",
       iconSize: 50,
-      zoom: 3,
+      zoom: 16,
       center: [52.2297, 21.0122],
       // baseUrl: 'https://www.google.pl/maps/place/',
-      baseUrl: 'https://www.google.com/maps/dir/?api=1',
+      baseUrl: "https://www.google.com/maps/dir/?api=1&origin=",
       markers: [
         {
-          "type": "Feature",
-          "properties": {
-            "name": "RKS Skra",
-            "amenity": "Przed wejściem na stadion",
-            "popupContent": "Najlepsze ceny na Mokotowie"
+          type: "Feature",
+          properties: {
+            name: "RKS Skra",
+            amenity: "Przed wejściem na stadion",
+            popupContent: "Najlepsze ceny na Mokotowie"
           },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [52.215901, 20.994437]
+          geometry: {
+            type: "Point",
+            coordinates: [52.215901, 20.994437]
           }
         },
         {
-          "type": "Feature",
-          "properties": {
-            "name": "Ambasada Japonii",
-            "amenity": "20 metrów od przystanku",
-            "popupContent": "Plastik jest fe"
+          type: "Feature",
+          properties: {
+            name: "Ambasada Japonii",
+            amenity: "20 metrów od przystanku",
+            popupContent: "Plastik jest fe"
           },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [52.216670, 21.040324]
+          geometry: {
+            type: "Point",
+            coordinates: [52.21667, 21.040324]
           }
         },
         {
-          "type": "Feature",
-          "properties": {
-            "name": "Ambasada Japonii",
-            "amenity": "20 metrów od przystanku",
-            "popupContent": "Plastik jest fe"
+          type: "Feature",
+          properties: {
+            name: "Ambasada Japonii",
+            amenity: "20 metrów od przystanku",
+            popupContent: "Plastik jest fe"
           },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [52.233076, 21.095317]
+          geometry: {
+            type: "Point",
+            coordinates: [52.233076, 21.095317]
           }
         },
         {
-          "type": "Feature",
-          "properties": {
-            "name": "Gocławski Balaton",
-            "amenity": "Przy paczkomacie",
-            "popupContent": "Plastik jest fe"
+          type: "Feature",
+          properties: {
+            name: "Gocławski Balaton",
+            amenity: "Przy paczkomacie",
+            popupContent: "Plastik jest fe"
           },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [52.228019, 21.089367]
+          geometry: {
+            type: "Point",
+            coordinates: [52.228019, 21.089367]
           }
         }
       ]
-    }
+    };
   },
   methods: {
     successPosition(position) {
-      const latitude  = position.coords.latitude
-      const longitude = position.coords.longitude
-      this.getUserPermission = true
+      const { latitude } = position.coords;
+      const { longitude } = position.coords;
+      this.getUserPermission = true;
 
       // status.textContent = '';
-      this.user.geometry.coordinates = [latitude, longitude]
+      this.user.geometry.coordinates = [latitude, longitude];
+      this.center = [latitude, longitude];
     },
     errorPosition() {
       //  status.textContent = 'Unable to retrieve your location'
@@ -129,14 +132,15 @@ export default {
       //origin: '52.183554,21.000471',
     },
     getUserPermission() {
-      console.log('inside getUse')
       if ("geolocation" in navigator) {
         /* geolocation is available */
-        navigator.geolocation.getCurrentPosition(this.successPosition, this.errorPosition)
-        console.log('success')
+        navigator.geolocation.getCurrentPosition(
+          this.successPosition,
+          this.errorPosition
+        );
+        console.log("success");
       } else {
         /* geolocation IS NOT available */
-        return 
       }
     },
     getUserPosition() {},
@@ -145,22 +149,25 @@ export default {
       return coords.join()
     },
     showPopup(e) {
-      console.log(e)
+      console.log(e);
     },
-    zoomUpdated (zoom) {
+    zoomUpdated(zoom) {
       this.zoom = zoom;
     },
-    centerUpdated (center) {
+    centerUpdated(center) {
       this.center = center;
     },
-    boundsUpdated (bounds) {
+    boundsUpdated(bounds) {
+      getPointsForBounds(bounds).then(markers => {
+        this.markers = markers;
+      });
       this.bounds = bounds;
     }
   },
   mounted() {
     this.getUserPermission();
   }
-}
+};
 </script>
 
 <style lang="scss">
