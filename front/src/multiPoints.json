@@ -1,0 +1,51 @@
+{
+    "points": [{
+            "type": "Feature",
+            "properties": {
+                "name": "RKS Skra",
+                "amenity": "Przed wejściem na stadion",
+                "popupContent": "Najlepsze ceny na Mokotowie"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [52.215901, 20.994437]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Ambasada Japonii",
+                "amenity": "20 metrów od przystanku",
+                "popupContent": "Plastik jest fe"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [52.216670, 21.040324]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Ambasada Japonii",
+                "amenity": "20 metrów od przystanku",
+                "popupContent": "Plastik jest fe"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [52.233076, 21.095317]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Gocławski Balaton",
+                "amenity": "Przy paczkomacie",
+                "popupContent": "Plastik jest fe"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [52.228019, 21.089367]
+            }
+        }
+    ]
+}
