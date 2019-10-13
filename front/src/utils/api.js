@@ -50,4 +50,33 @@ export const verifyString = string => {
     });
 };
 
-/** */
+/**
+ * Login
+ */
+export const login = ({ email, password }) => {
+  const data = { email, password };
+  return axios
+    .post(`${API_URL}login`, data)
+    .then(response => response.data)
+    .then(data => {
+      localStorage.setItem("authToken", data.token);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+
+export const getUser = () => {
+  const token = localStorage.getItem("authToken");
+  return axios
+    .get(`${API_URL}user?api_token=${token}`)
+    .then(response => {
+      if (response.status === 401) {
+        localStorage.removeItem("authToken");
+      }
+      return response.data;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
