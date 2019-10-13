@@ -28,13 +28,17 @@ Route::middleware('api')->name('api.')->group(function(){
     });
 
 
-    Route::name('qrs.')->prefix('qry')->group(function(){
+    Route::name('qr.')->prefix('qry')->group(function(){
         Route::post('/wygeneruj','QrController@generate')->name('generate');
         Route::post('/zweryfikuj','QrController@verify')->name('verify');
     });
 
     Route::name('user.')->prefix('uzytkownik')->group(function(){
         Route::post('/dane','UserController@data')->name('data');
+    });
+
+    Route::name('bottle.')->prefix('butelki')->group(function(){
+        Route::post('/','BottleController@getAll')->name('index');
     });
 
 });

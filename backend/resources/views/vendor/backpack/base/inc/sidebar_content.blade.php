@@ -4,3 +4,4 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('place') }}'><i class='nav-icon fa fa-question'></i> Places</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('qr') }}'><i class='nav-icon fa fa-question'></i> Qrs</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon fa fa-question'></i> Users</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('bottle') }}'><i class='nav-icon fa fa-question'></i> Bottles</a></li>
