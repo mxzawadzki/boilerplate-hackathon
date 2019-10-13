@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
     <UserBar />
     <AppMap />
     <v-row justify="center">
@@ -31,6 +32,7 @@
 <script>
 // @ is an alias to /src
 import AppMap from "@/components/AppMap.vue";
+import AppTutorial from '@/components/AppTutorial.vue'
 import UserBar from "@/components/UserBar.vue";
 import Scanner from "@/components/Scanner.vue";
 
@@ -38,13 +40,23 @@ export default {
   name: "home",
   components: {
     AppMap,
+    AppTutorial,
     UserBar,
-    Scanner
+    Scanner,
   },
   data() {
     return {
-      scannerModal: false
+      scannerModal: false,
+      tutorial: true
     };
+  },
+  methods: {
+    closeTutorial() {
+      this.tutorial = false;
+    },
+    showTutorial() {
+      this.tutorial = true;
+    }
   }
 };
 </script>

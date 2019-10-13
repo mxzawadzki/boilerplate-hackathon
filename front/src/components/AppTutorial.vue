@@ -1,10 +1,12 @@
 <template>
 <div class="slider">
-  <v-app id="inspire">
-    <v-carousel>
+    <v-carousel
+    height="500"
+    >
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="slide.color"
+        height="300"
       >
         <v-sheet
           :color="slide.color"
@@ -20,13 +22,12 @@
               <img class="slider__img" :src="slide.img">
               <p class="slider__number">{{ i + 1 }}</p>
               <p class="slider__text">{{slide.text}}</p>
-              <button v-if="i === 3" @click="closeTutorial">Do dzieła!</button>
+              <v-btn v-if="i === 3" @click="closeTutorial">Do dzieła!</v-btn>
             </div>
           </v-row>
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-  </v-app>
 </div>
 </template>
 
@@ -67,5 +68,11 @@ methods: {
 </script>
 
 <style>
-
+.slider {
+  width: 50vw;
+  height: 50vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 </style>
