@@ -10,6 +10,6 @@ class BottleController extends Controller
 {
     public function getAll(){
         $bottles = Bottle::all();
-        return BottleResource::collection($bottles);
+        return response()->json(BottleResource::collection($bottles));
     }
 }
