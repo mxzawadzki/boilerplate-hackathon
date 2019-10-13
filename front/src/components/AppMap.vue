@@ -63,7 +63,7 @@ export default {
       zoom: 16,
       center: [52.2297, 21.0122],
       // baseUrl: 'https://www.google.pl/maps/place/',
-      baseUrl: "https://www.google.com/maps/dir/?api=1&origin=",
+      baseUrl: "https://www.google.com/maps/dir/?api=1",
       markers: [
         {
           type: "Feature",
