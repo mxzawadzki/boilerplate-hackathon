@@ -25,6 +25,9 @@
         </v-card>
       </v-dialog>
     </v-row>
+    <div class="profile-wrapper over-map">
+      <Profile :user="user" />
+    </div>
   </div>
 </template>
 
@@ -33,21 +36,23 @@
 import AppMap from "@/components/AppMap.vue";
 import UserBar from "@/components/UserBar.vue";
 import Scanner from "@/components/Scanner.vue";
+import Profile from "@/components/Profile.vue";
 
 export default {
   name: "home",
   components: {
     AppMap,
     UserBar,
-    Scanner
+    Scanner,
+    Profile
   },
   data() {
     return {
       scannerModal: false,
       user: {
-        username: "Example",
+        name: "Example",
         email: "example@example.com",
-        score: 1536
+        score: 15036
       }
     };
   }
@@ -62,5 +67,11 @@ export default {
   position: absolute;
   bottom: 40px;
   /* right: 40px; */
+}
+.profile-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
 }
 </style>

@@ -30,7 +30,10 @@ export const getPointsForBounds = bounds => {
   };
   return axios
     .post(`${API_URL}miejsca/w-obszarze`, data)
-    .then(response => response.data);
+    .then(response => response.data)
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 /**
@@ -41,7 +44,10 @@ export const verifyString = string => {
   const data = { string };
   return axios
     .post(`${API_URL}qry/zweryfikuj`, data)
-    .then(response => response.data);
+    .then(response => response.data)
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 /** */
