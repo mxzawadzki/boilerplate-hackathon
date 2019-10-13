@@ -157,6 +157,7 @@ export default {
     boundsUpdated(bounds) {
       getPointsForBounds(bounds).then(markers => {
         this.markers = markers;
+        console.log(markers, 'markers')
       });
       this.bounds = bounds;
     }
