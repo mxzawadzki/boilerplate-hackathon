@@ -2,7 +2,7 @@
 <div class="slider">
     <v-carousel
     height="500"
-    :show-arrows="false"
+    :show-arrows="true"
     >
       <v-carousel-item
         v-for="(slide, i) in slides"
@@ -70,6 +70,9 @@ data () {
 methods: {
   closeTutorial() {
     this.$emit('closeTutorial')
+  },
+  openTutorial() {
+    this.$emit('openTutorial')
   }
 }
 }
