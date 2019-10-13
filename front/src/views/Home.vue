@@ -16,7 +16,10 @@
           </v-btn>
         </template>
         <v-card>
-          <Scanner @closeScannerModal="scannerModal = false" />
+          <Scanner
+            @closeScannerModal="scannerModal = false"
+            @addPoints="addPoints"
+          />
           <v-card-actions>
             <div class="flex-grow-1"></div>
             <v-btn color="green darken-1" text @click="scannerModal = false"
@@ -66,6 +69,12 @@ export default {
     },
     showTutorial() {
       this.tutorial = true;
+    },
+    addPoints(points) {
+      this.user = {
+        ...this.user,
+        score: this.user.score + points
+      }
     }
   }
 };

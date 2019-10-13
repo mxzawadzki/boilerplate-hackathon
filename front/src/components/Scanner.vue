@@ -32,14 +32,10 @@ export default {
   methods: {
     onDecode(result) {
       verifyString(result).then(data => {
-        /* debug */
-        // data = { valid: false, points: -1 };
-        data = { valid: true, points: 1000 };
-        debugger
         if (data.valid) {
           this.$emit("addPoints", data.points);
         }
-      })
+      });
       this.$emit("closeScannerModal");
     },
 
