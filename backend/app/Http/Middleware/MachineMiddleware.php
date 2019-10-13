@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Machine;
+use App\Machines;
 use Closure;
 
 class MachineMiddleware
@@ -17,7 +17,7 @@ class MachineMiddleware
     public function handle($request, Closure $next)
     {
         $apiToken = $request->api_token;
-        $machine = Machine::where('api_token','like',$apiToken)->get()->first();
+        $machine = Machines::where('api_token','like',$apiToken)->get()->first();
 
         if($machine===null)
             return abort(401);
