@@ -11,7 +11,7 @@
               color="primary"
               v-on="on"
               class="scanner-button over-map"
-              dark
+              x-large
             >
               Open Code Scanner
             </v-btn>
@@ -55,8 +55,8 @@
             <v-card>
               <Login
                 :loginData.sync="loginData"
-                @login="login"
                 :loading="loading"
+                @login="login"
               />
             </v-card>
           </v-dialog>
@@ -156,7 +156,7 @@ export default {
   z-index: 1000;
 }
 .scanner-button {
-  position: absolute;
+  position: fixed !important;
   bottom: 40px;
   /* right: 40px; */
 }

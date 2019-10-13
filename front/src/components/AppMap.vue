@@ -60,7 +60,7 @@ export default {
       staticAnchor: [0, 0],
       customText: "Bottle Drop",
       iconSize: 50,
-      zoom: 16,
+      zoom: 13,
       center: [52.2297, 21.0122],
       // baseUrl: 'https://www.google.pl/maps/place/',
       baseUrl: "https://www.google.com/maps/dir/?api=1",
