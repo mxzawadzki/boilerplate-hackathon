@@ -1,5 +1,29 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
   </div>
 </template>
+
+<script>
+import AppTutorial from '@/components/AppTutorial.vue'
+export default {
+  name: 'home',
+  components: {
+    AppTutorial
+  },
+  data() {
+    return {
+      tutorial: true
+    }
+  },
+  methods: {
+    closeTutorial() {
+      this.tutorial = false;
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
