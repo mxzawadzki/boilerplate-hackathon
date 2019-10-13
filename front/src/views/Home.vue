@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
     <UserBar />
     <AppMap />
     <v-row justify="center">
@@ -34,6 +35,7 @@
 <script>
 // @ is an alias to /src
 import AppMap from "@/components/AppMap.vue";
+import AppTutorial from "@/components/AppTutorial.vue";
 import UserBar from "@/components/UserBar.vue";
 import Scanner from "@/components/Scanner.vue";
 import Profile from "@/components/Profile.vue";
@@ -42,6 +44,7 @@ export default {
   name: "home",
   components: {
     AppMap,
+    AppTutorial,
     UserBar,
     Scanner,
     Profile
@@ -53,8 +56,17 @@ export default {
         name: "Example",
         email: "example@example.com",
         score: 15036
-      }
+      },
+      tutorial: true
     };
+  },
+  methods: {
+    closeTutorial() {
+      this.tutorial = false;
+    },
+    showTutorial() {
+      this.tutorial = true;
+    }
   }
 };
 </script>

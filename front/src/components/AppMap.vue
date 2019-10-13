@@ -13,20 +13,13 @@
         <div class="d">User</div>
       </l-icon>
     </l-marker>
-    <l-marker
-      v-for="marker in markers"
-      :key="marker.id"
-      :lat-lng="marker.geometry.coordinates"
-      @click="showPopup"
-    >
-      <l-popup>
-        <p class="marker__text">{{marker.properties.popupContent}}</p>
-        <a
-          class="marker__link"
-          :href="baseUrl + origin + '&destination=' + setCoords(marker.geometry.coordinates)"
-        >Link</a>
-      </l-popup>
-      <!-- <l-icon
+      <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
+        <l-popup>
+          <p class="marker__text">{{marker.properties.popupContent}}</p>
+          <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Link</a>
+          <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Link</a>
+        </l-popup>
+        <!-- <l-icon
           :icon-anchor="staticAnchor"
           class="marker__icon"
       class-name="someExtraClass">-->
@@ -136,6 +129,7 @@ export default {
     errorPosition() {
       //  status.textContent = 'Unable to retrieve your location'
       // TODO center on warsaw
+      //origin: '52.183554,21.000471',
     },
     getUserPermission() {
       if ("geolocation" in navigator) {
@@ -151,7 +145,8 @@ export default {
     },
     getUserPosition() {},
     setCoords(coords) {
-      return coords.join();
+      console.log(this.userAccept)
+      return coords.join()
     },
     showPopup(e) {
       console.log(e);
