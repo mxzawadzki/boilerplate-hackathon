@@ -30,10 +30,7 @@ export const getPointsForBounds = bounds => {
   };
   return axios
     .post(`${API_URL}miejsca/w-obszarze`, data)
-    .then(response => response.data)
-    .catch(error => {
-      console.error(error);
-    });
+    .then(response => response.data);
 };
 
 /**
@@ -41,9 +38,15 @@ export const getPointsForBounds = bounds => {
  * @param {*} string
  */
 export const verifyString = string => {
-  const data = { string };
+  const api_token = localStorage.getItem("authToken");
+  const data = {
+    string,
+    api_token
+  };
   return axios
-    .post(`${API_URL}qry/zweryfikuj`, data)
+    .post(`${API_URL}qry/zweryfikuj?api_token=${api_token}`, data, {
+      headers: { Authorization: "Bearer " + api_token }
+    })
     .then(response => response.data)
     .catch(error => {
       console.error(error);
@@ -61,25 +64,17 @@ export const login = ({ email, password }) => {
     .then(data => {
       localStorage.setItem("authToken", data.token);
       return data;
-    })
-    .catch(error => {
-      console.error(error);
     });
 };
 
 export const getUser = () => {
-  const token = localStorage.getItem("authToken");
-  return axios
-    .get(`${API_URL}user?api_token=${token}`)
-    .then(response => {
-      if (response.status === 401) {
-        localStorage.removeItem("authToken");
-      }
-      return response.data;
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  const api_token = localStorage.getItem("authToken");
+  return axios.get(`${API_URL}user?api_token=${api_token}`).then(response => {
+    if (response.status === 401) {
+      localStorage.removeItem("authToken");
+    }
+    return response.data;
+  });
 };
 
 export const isLoggedIn = () => {

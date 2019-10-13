@@ -1,7 +1,17 @@
 <template>
   <div id="home">
-    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
-    <AppMap />
+    <AppMap @onUserPosition="onUserPosition" :center.sync="mapCenter" />
+
+    <v-btn
+      color="primary"
+      @click="goToUserPosition"
+      class="position-button over-map"
+      :class="{ 'logged-in': user }"
+      medium
+      fab
+    >
+      <v-icon>mdi-crosshairs</v-icon>
+    </v-btn>
 
     <!-- logged in user -->
     <template v-if="user">
@@ -12,9 +22,10 @@
               color="primary"
               v-on="on"
               class="scanner-button over-map"
-              dark
+              medium
+              fab
             >
-              Open Code Scanner
+              <v-icon>mdi-qrcode</v-icon>
             </v-btn>
           </template>
           <v-card>
@@ -39,12 +50,13 @@
 
     <!-- anonymous user -->
     <template v-else>
+      <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
       <div class="login-wrapper over-map">
         <v-row justify="center">
           <v-dialog v-model="loginModal" class="over-map" max-width="640">
             <template v-slot:activator="{ on }">
               <div class="login-wrapper over-map">
-                <v-btn color="primary" v-on="on" dark>
+                <v-btn color="primary" v-on="on" dark :loading="loading">
                   Login
                 </v-btn>
                 <v-btn class="mx-2" color="primary" @click="toggleTutorial" dark>
@@ -53,7 +65,11 @@
               </div>
             </template>
             <v-card>
-              <Login :loginData.sync="loginData" @login="login" />
+              <Login
+                :loginData.sync="loginData"
+                :loading="loading"
+                @login="login"
+              />
             </v-card>
           </v-dialog>
         </v-row>
@@ -67,7 +83,6 @@
 // @ is an alias to /src
 import AppMap from "@/components/AppMap.vue";
 import AppTutorial from "@/components/AppTutorial.vue";
-import UserBar from "@/components/UserBar.vue";
 import Scanner from "@/components/Scanner.vue";
 import Profile from "@/components/Profile.vue";
 import Login from "@/components/Login.vue";
@@ -85,11 +100,13 @@ export default {
   },
   data() {
     return {
+      mapCenter: [52.2297, 21.0122],
       loading: false,
       scannerModal: false,
       loginModal: false,
       user: null,
       tutorial: true,
+      userPosition: null,
       loginData: {
         email: "",
         password: ""
@@ -125,17 +142,33 @@ export default {
         score: this.user.score + points
       };
     },
+    onUserPosition(coords) {
+      this.saveUserPosition(coords);
+      this.goToUserPosition();
+    },
+    saveUserPosition(coords) {
+      this.userPosition = coords;
+    },
+    goToUserPosition() {
+      this.mapCenter = [...this.userPosition];
+    },
     async login() {
       this.loading = true;
       const { email, password } = this.loginData;
-      await login({ email, password });
-      const userData = await getUser();
-      this.user = {
-        name: userData.name,
-        email: userData.email,
-        score: userData.score
-      };
-      this.loading = false;
+      try {
+        await login({ email, password });
+        const userData = await getUser();
+        this.user = {
+          name: userData.name,
+          email: userData.email,
+          score: userData.score
+        };
+        this.loginModal = false;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
     },
     logout() {
       this.user = null;
@@ -150,10 +183,21 @@ export default {
   z-index: 1000;
 }
 .scanner-button {
-  position: absolute;
-  bottom: 40px;
-  /* right: 40px; */
+  position: fixed !important;
+  top: 10px;
+  right: 10px;
 }
+.position-button {
+  position: fixed !important;
+  top: 60px;
+  right: 10px;
+}
+
+.position-button.logged-in {
+  top: 10px;
+  right: 80px;
+}
+
 .profile-wrapper {
   position: fixed;
   bottom: 0;
