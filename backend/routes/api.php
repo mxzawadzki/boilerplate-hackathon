@@ -38,7 +38,7 @@ Route::middleware('api')->name('api.')->group(function(){
     });
 
     Route::name('bottle.')->prefix('butelki')->group(function(){
-        Route::post('/','BottleController@getAll')->name('index');
+        Route::get('/','BottleController@getAll')->name('index');
     });
 
 });
