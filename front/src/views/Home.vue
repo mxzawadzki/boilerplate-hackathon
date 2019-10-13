@@ -3,36 +3,6 @@
     <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
     <AppMap />
 
-    <!-- anonymous user -->
-    <template>
-      <div class="login-wrapper over-map">
-        <v-row justify="center">
-          <v-dialog v-model="loginModal" class="over-map" max-width="640">
-            <template v-slot:activator="{ on }">
-              <div class="login-wrapper over-map">
-                <v-btn color="primary" v-on="on" dark>
-                  Login
-                </v-btn>
-              </div>
-            </template>
-            <v-card>
-              <Login />
-              <v-card-actions>
-                <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="loginModal = false"
-                  >Login</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="loginModal = false"
-                  >Close</v-btn
-                >
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-row>
-      </div>
-    </template>
-    <!-- anonymous user -->
-
     <!-- logged in user -->
     <template v-if="user">
       <v-row justify="center">
@@ -66,6 +36,34 @@
       </div>
     </template>
     <!-- logged in user -->
+
+    <!-- anonymous user -->
+    <template v-else>
+      <div class="login-wrapper over-map">
+        <v-row justify="center">
+          <v-dialog v-model="loginModal" class="over-map" max-width="640">
+            <template v-slot:activator="{ on }">
+              <div class="login-wrapper over-map">
+                <v-btn color="primary" v-on="on" dark>
+                  Login
+                </v-btn>
+              </div>
+            </template>
+            <v-card>
+              <Login :loginData.sync="loginData" />
+              <v-card-actions>
+                <div class="flex-grow-1"></div>
+                <v-btn color="blue darken-1" text @click="login">Login</v-btn>
+                <v-btn color="blue darken-1" text @click="loginModal = false"
+                  >Close</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+      </div>
+    </template>
+    <!-- anonymous user -->
   </div>
 </template>
 
@@ -78,7 +76,7 @@ import Scanner from "@/components/Scanner.vue";
 import Profile from "@/components/Profile.vue";
 import Login from "@/components/Login.vue";
 
-import { getUser } from "@/utils/api.js";
+import { getUser, isLoggedIn, login } from "@/utils/api.js";
 
 export default {
   name: "home",
@@ -94,13 +92,18 @@ export default {
       scannerModal: false,
       loginModal: false,
       user: null,
-      tutorial: true
+      tutorial: true,
+      loginData: {
+        email: "",
+        password: ""
+      }
     };
   },
   mounted() {
-    // getUser().then(data => {
-    //   debugger;
-    // });
+    // check token
+    if (isLoggedIn()) {
+      // getUser
+    }
   },
   methods: {
     closeTutorial() {
@@ -114,6 +117,12 @@ export default {
         ...this.user,
         score: this.user.score + points
       };
+    },
+    async login() {
+      const { email, password } = this.loginData;
+      await login({ email, password });
+      const userData = await getUser();
+      debugger
     }
   }
 };

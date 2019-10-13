@@ -60,6 +60,7 @@ export const login = ({ email, password }) => {
     .then(response => response.data)
     .then(data => {
       localStorage.setItem("authToken", data.token);
+      return data;
     })
     .catch(error => {
       console.error(error);
@@ -79,4 +80,9 @@ export const getUser = () => {
     .catch(error => {
       console.error(error);
     });
+};
+
+export const isLoggedIn = () => {
+  const token = localStorage.getItem("authToken");
+  return !!token;
 };

@@ -7,8 +7,9 @@
     <v-card-text>
       <v-form>
         <v-text-field
-          label="Login"
-          name="login"
+          label="Email"
+          name="email"
+          v-model="computedLoginData.email"
           prepend-icon="mdi-account"
           type="text"
         ></v-text-field>
@@ -17,6 +18,7 @@
           id="password"
           label="Password"
           name="password"
+          v-model="computedLoginData.password"
           prepend-icon="mdi-lock"
           type="password"
         ></v-text-field>
@@ -26,7 +28,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["loginData"],
+  computed: {
+    computedLoginData: {
+      get() {
+        return this.loginData;
+      },
+      set(v) {
+        this.$emit("update:loginData", v);
+      }
+    }
+  }
+};
 </script>
 
 <style></style>
