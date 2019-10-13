@@ -1,6 +1,6 @@
 <template>
   <div class="slider">
-    <v-carousel height="500" :show-arrows="false">
+    <v-carousel height="500" :show-arrows="true">
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="slide.color"
@@ -67,6 +67,9 @@ export default {
   methods: {
     closeTutorial() {
       this.$emit("closeTutorial");
+    },
+    openTutorial() {
+      this.$emit("openTutorial");
     }
   }
 };
@@ -152,6 +155,18 @@ export default {
   .slider {
     min-width: 680px;
     width: auto;
+
+    &__text {
+      font-size: 3rem;
+    }
+
+    &__title {
+      font-size: 3rem;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem !important;
+    }
 
     &__button {
       height: 4rem !important;
