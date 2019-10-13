@@ -1,6 +1,10 @@
 <template>
   <div class="about">
-    <AppTutorial @closeTutorial="closeTutorial" v-if="tutorial" />
+    <AppTutorial 
+      @openTutorial="openTutorial"
+      @closeTutorial="closeTutorial"
+      v-if="tutorial"
+    />
   </div>
 </template>
 
@@ -19,6 +23,9 @@ export default {
   methods: {
     closeTutorial() {
       this.tutorial = false;
+    },
+    openTutorial() {
+      this.tutorial = true;
     }
   }
 }
