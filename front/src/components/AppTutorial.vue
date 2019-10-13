@@ -1,81 +1,83 @@
 <template>
 <div class="slider">
     <v-carousel
+    class="slider__carousel"
     height="500"
     :show-arrows="true"
     >
+      <v-icon large color="rgba(255, 255, 255, .8)" class="slider__close" @click="closeTutorial">mdi-close</v-icon>
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="slide.color"
         height="300"
       >
-        <v-sheet
-          :color="slide.color"
-          height="100%"
-          tile
-        >
-          <v-row
-            class="fill-height"
-            align="start"
-            justify="end"
-          >
+        <v-sheet :color="slide.color" height="100%" tile>
+          <v-row class="fill-height" align="start" justify="end">
             <div class="display-3">
-              <img class="slider__img" :src="slide.img">
+              <img class="slider__img" :src="slide.img" />
               <p class="slider__title" v-if="i == 0">Witaj w aplikacji</p>
               <p class="slider__app-title" v-if="i == 0">WZB</p>
               <p class="slider__number" v-if="i > 0">{{ i }}</p>
-              <v-btn class="slider__button" color="yellow darken-2" v-if="i === 4" @click="closeTutorial">Do dzieła!</v-btn>
-              <p class="slider__text" :class="{'slider__subtitle': i == 0}">{{slide.text}}</p>
+              <v-btn
+                class="slider__button"
+                color="yellow darken-2"
+                v-if="i === 4"
+                @click="closeTutorial"
+                >Do dzieła!</v-btn
+              >
+              <p class="slider__text" :class="{ slider__subtitle: i == 0 }">
+                {{ slide.text }}
+              </p>
             </div>
           </v-row>
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-data () {
-  return {
-    slides: [
-      {
-        // img: require('@/assets/img/slide1.jpg'),
-        color: 'primary',
-        text: 'Ocal świat przed plastikiem'
-      },
-      {
-        // img: require('@/assets/img/slide1.jpg'),
-        color: 'red',
-        text: 'Zaloguj się lub wyświetl mapę'
-      },
-      {
-        // img: require('@/assets/img/slide1.jpg'),
-        color: 'yellow darken-2',
-        text: 'Znajdź najbliższy butelkomat'
-      },
-      {
-        // img: require('@/assets/img/slide1.jpg'),
-        color: 'light-green',
-        text: 'Zeskanuj kod QR i wrzuć butelkę'
-      },
-      {
-        // img: require('@/assets/img/slide1.jpg'),
-        color: 'primary',
-        text: 'Za każdą butelkę zdobywaj super nagrody'
-      }
-    ],
-  }
-},
-methods: {
-  closeTutorial() {
-    this.$emit('closeTutorial')
+  data() {
+    return {
+      slides: [
+        {
+          // img: require('@/assets/img/slide1.jpg'),
+          color: "primary",
+          text: "Ocal świat przed plastikiem"
+        },
+        {
+          // img: require('@/assets/img/slide1.jpg'),
+          color: "red",
+          text: "Zaloguj się lub wyświetl mapę"
+        },
+        {
+          // img: require('@/assets/img/slide1.jpg'),
+          color: "yellow darken-2",
+          text: "Znajdź najbliższy butelkomat"
+        },
+        {
+          // img: require('@/assets/img/slide1.jpg'),
+          color: "light-green",
+          text: "Zeskanuj kod QR i wrzuć butelkę"
+        },
+        {
+          // img: require('@/assets/img/slide1.jpg'),
+          color: "primary",
+          text: "Za każdą butelkę zdobywaj super nagrody"
+        }
+      ]
+    };
   },
-  openTutorial() {
-    this.$emit('openTutorial')
+  methods: {
+    closeTutorial() {
+      this.$emit("closeTutorial");
+    },
+    openTutorial() {
+      this.$emit("openTutorial");
+    }
   }
-}
-}
+};
 </script>
 
 <style lang="scss">
@@ -87,10 +89,22 @@ methods: {
   left: 50%;
   transform: translate(-50%, -50%);
 
+  &__carousel {
+    position: relative;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    margin: .5rem;
+  }
+
   &__number {
     font-size: 25rem;
     font-weight: 800;
-    opacity: .2;
+    opacity: 0.2;
     position: absolute;
     top: 10rem;
     left: 1rem;
@@ -108,7 +122,7 @@ methods: {
   }
 
   &__app-title {
-    font-family: 'Monoton';
+    font-family: "Monoton";
     font-size: 5.5rem;
     position: absolute;
     top: 50%;
@@ -149,7 +163,7 @@ methods: {
 
 @media screen and (min-width: 375px) {
   .slider {
-      &__app-title {
+    &__app-title {
       font-size: 6.6rem;
     }
   }
@@ -173,12 +187,11 @@ methods: {
     }
 
     &__button {
-    height: 4rem !important;
-    width: 15rem !important;
-    font-size: 2rem !important;
-    font-weight: 500 !important;
+      height: 4rem !important;
+      width: 15rem !important;
+      font-size: 2rem !important;
+      font-weight: 500 !important;
     }
   }
-
 }
 </style>

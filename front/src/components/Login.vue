@@ -28,14 +28,16 @@
     </v-card-text>
     <v-card-actions>
       <div class="flex-grow-1"></div>
-      <v-btn color="blue darken-1" text @click="login">Login</v-btn>
+      <v-btn color="blue darken-1" text @click="login" :loading="loading"
+        >Login</v-btn
+      >
     </v-card-actions>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["loginData"],
+  props: ["loginData", "loading"],
   computed: {
     computedLoginData: {
       get() {

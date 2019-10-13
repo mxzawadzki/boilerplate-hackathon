@@ -2,7 +2,7 @@
   <l-map
     style="height: 100vh; width: 100vw"
     :zoom="zoom"
-    :center="center"
+    :center="computedCenter"
     @update:zoom="zoomUpdated"
     @update:center="centerUpdated"
     @update:bounds="boundsUpdated"
@@ -10,7 +10,7 @@
     <l-tile-layer :url="url"></l-tile-layer>
     <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
       <l-icon>
-          <v-icon class="marker__icon">mdi-account</v-icon>
+        <v-icon class="marker__icon">mdi-account</v-icon>
       </l-icon>
     </l-marker>
       <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
@@ -28,6 +28,7 @@ import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "vue2-leaflet";
 import { getPointsForBounds } from "@/utils/api.js";
 
 export default {
+  props: ["center"],
   name: "AppMap",
   components: {
     LMap,
@@ -53,8 +54,7 @@ export default {
       staticAnchor: [0, 0],
       customText: "Bottle Drop",
       iconSize: 50,
-      zoom: 16,
-      center: [52.2297, 21.0122],
+      zoom: 13,
       // baseUrl: 'https://www.google.pl/maps/place/',
       baseUrl: "https://www.google.com/maps/dir/?api=1",
       markers: [
@@ -109,24 +109,35 @@ export default {
       ]
     };
   },
+  computed: {
+    computedCenter: {
+      get() {
+        return this.center;
+      },
+      set(v) {
+        this.$emit("update:center", v);
+      }
+    }
+  },
   methods: {
     successPosition(position) {
-      console.log('invoke successPosition');
+      // console.log("invoke successPosition");
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      console.log(position, 'position', this.userAccept)
+      // console.log(position, "position", this.userAccept);
       this.userAccept = true;
       this.getUserPermission = true;
 
       // status.textContent = '';
       this.user.geometry.coordinates = [latitude, longitude];
-      this.center = [latitude, longitude];
+      this.computedCenter = [latitude, longitude];
+      this.$emit("onUserPosition", [latitude, longitude]);
     },
     errorPosition() {
       //  status.textContent = 'Unable to retrieve your location'
       // TODO center on warsaw
       //origin: '52.183554,21.000471',
-      console.log('fail pos')
+      console.log("fail pos");
     },
     getUserPermission() {
       if ("geolocation" in navigator) {
@@ -142,8 +153,8 @@ export default {
     },
     getUserPosition() {},
     setCoords(coords) {
-      console.log(this.userAccept)
-      return coords.join()
+      console.log(this.userAccept);
+      return coords.join();
     },
     showPopup(e) {
       console.log(e);
@@ -152,7 +163,7 @@ export default {
       this.zoom = zoom;
     },
     centerUpdated(center) {
-      this.center = center;
+      this.computedCenter = center;
     },
     boundsUpdated(bounds) {
       getPointsForBounds(bounds).then(markers => {
@@ -172,6 +183,7 @@ export default {
 .leaflet-marker-icon {
   position: relative;
 }
+
 .leaflet-popup-content-wrapper {
     border-radius: 4px !important;
     overflow: hidden;
@@ -198,6 +210,7 @@ export default {
   opacity: 0.028;
   z-index: -1;
 }
+
 .marker {
   &__icon {
     position: relative;
@@ -214,6 +227,7 @@ export default {
     position: relative;
     z-index: 1;
   }
+
   &__link {
     font-size: 1rem;
     text-decoration: none;
