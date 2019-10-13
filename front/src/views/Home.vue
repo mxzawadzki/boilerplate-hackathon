@@ -1,6 +1,16 @@
 <template>
   <div id="home">
-    <AppMap />
+    <AppMap @onUserPosition="onUserPosition" :center.sync="mapCenter" />
+
+    <v-btn
+      color="primary"
+      @click="goToUserPosition"
+      class="position-button over-map"
+      large
+      fab
+    >
+      <v-icon>mdi-crosshairs</v-icon>
+    </v-btn>
 
     <!-- logged in user -->
     <template v-if="user">
@@ -14,7 +24,7 @@
               large
               fab
             >
-             <v-icon>mdi-qrcode</v-icon>
+              <v-icon>mdi-qrcode</v-icon>
             </v-btn>
           </template>
           <v-card>
@@ -89,11 +99,13 @@ export default {
   },
   data() {
     return {
+      mapCenter: [52.2297, 21.0122],
       loading: false,
       scannerModal: false,
       loginModal: false,
       user: null,
       tutorial: true,
+      userPosition: null,
       loginData: {
         email: "",
         password: ""
@@ -125,6 +137,16 @@ export default {
         ...this.user,
         score: this.user.score + points
       };
+    },
+    onUserPosition(coords) {
+      this.saveUserPosition(coords);
+      this.goToUserPosition();
+    },
+    saveUserPosition(coords) {
+      this.userPosition = coords;
+    },
+    goToUserPosition() {
+      this.mapCenter = [...this.userPosition];
     },
     async login() {
       this.loading = true;
@@ -160,6 +182,11 @@ export default {
   position: fixed !important;
   top: 10px;
   right: 10px;
+}
+.position-button {
+  position: fixed !important;
+  top: 10px;
+  right: 80px;
 }
 .profile-wrapper {
   position: fixed;
