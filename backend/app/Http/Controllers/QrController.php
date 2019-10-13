@@ -18,7 +18,7 @@ class QrController extends Controller
         $QR = $qr->first();
 
         $points = $QR ? $QR->points : -1;
-        dd($user);
+
         if($user){
             if ($points>=0){
                 $user->score+=$points;
