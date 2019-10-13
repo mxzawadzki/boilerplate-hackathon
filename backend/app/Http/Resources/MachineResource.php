@@ -20,8 +20,8 @@ class MachineResource extends JsonResource
                 "name" => $this->name,
                 "amenity" => $this->amenity,
                 "popupContent" => $this->popup_content,
-                "week_at" => $this->week_at,
-                "weekend_at" => $this->weekend_at,
+                "week_at" => $this->open_week_at,
+                "weekend_at" => $this->open_weekend_at,
             ],
             "geometry" => [
                 "type" => "Point",
