@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <p class="error">{{ error }}</p>
+  <div class="Scanner__wrapper">
+    <!-- <p class="error">{{ error }}</p> -->
 
-    <p class="decode-result">
+    <!-- <p class="decode-result">
       Last result:
       <b>{{ result }}</b>
-    </p>
+    </p> -->
 
-    <qrcode-stream @decode="onDecode" @init="onInit" class="VideoPreview" />
+    <qrcode-stream
+      @decode="onDecode"
+      @init="onInit"
+      class="Scanner__VideoPreview"
+    />
   </div>
 </template>
 
@@ -57,9 +61,16 @@ export default {
   font-weight: bold;
   color: red;
 }
-
-.VideoPreview {
-  width: 100%;
-  height: 100%;
+.Scanner__wrapper {
+  /* position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: black;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center; */
 }
 </style>
