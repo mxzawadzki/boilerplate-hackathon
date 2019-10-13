@@ -10,7 +10,7 @@
     <l-tile-layer :url="url"></l-tile-layer>
     <l-marker v-if="userAccept" :lat-lng="user.geometry.coordinates">
       <l-icon>
-        <div class="d">User</div>
+          <v-icon class="marker__icon">mdi-account</v-icon>
       </l-icon>
     </l-marker>
       <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
@@ -19,13 +19,6 @@
           <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a>
           <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Znajdź drogę <v-icon  color="#fbc02d">mdi-google-maps</v-icon></a>
         </l-popup>
-        <!-- <l-icon
-          :icon-anchor="staticAnchor"
-          class="marker__icon"
-      class-name="someExtraClass">-->
-      <!-- <div class="headline marker__headline"><p>{{ customText }}</p></div> -->
-      <!-- <img src="@/assets/img/bottle.png"> -->
-      <!-- </l-icon> -->
     </l-marker>
   </l-map>
 </template>
@@ -118,8 +111,11 @@ export default {
   },
   methods: {
     successPosition(position) {
+      console.log('invoke successPosition');
       const { latitude } = position.coords;
       const { longitude } = position.coords;
+      console.log(position, 'position', this.userAccept)
+      this.userAccept = true;
       this.getUserPermission = true;
 
       // status.textContent = '';
@@ -130,6 +126,7 @@ export default {
       //  status.textContent = 'Unable to retrieve your location'
       // TODO center on warsaw
       //origin: '52.183554,21.000471',
+      console.log('fail pos')
     },
     getUserPermission() {
       if ("geolocation" in navigator) {
@@ -203,6 +200,14 @@ export default {
 }
 
 .marker {
+  &__icon {
+    position: relative;
+    top: -4px;
+    left: -4px;
+    background: white;
+    border-radius: 900px;
+    padding: 8px;
+  }
   &__text {
     font-size: 1.2rem;
     font-weight: 600;
