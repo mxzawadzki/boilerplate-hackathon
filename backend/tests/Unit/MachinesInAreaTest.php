@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Http\Resources\MachineResource;
-use App\Machine;
+use App\Machines;
 use App\User;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class MachinesInAreaTest extends TestCase
      */
     public function testExample()
     {
-        $place1 = Machine::create([
+        $place1 = Machines::create([
             "popup_content" => "popup_content",
             "amenity" => "amenity",
             "name" => "Punkt 1",
@@ -27,7 +27,7 @@ class MachinesInAreaTest extends TestCase
             "lng" => 0.500000,
         ]);
 
-        $place2 = Machine::create([
+        $place2 = Machines::create([
             "popup_content" => "popup_content",
             "amenity" => "amenity",
             "name" => "Punkt 2",
