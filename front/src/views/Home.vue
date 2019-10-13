@@ -6,7 +6,8 @@
       color="primary"
       @click="goToUserPosition"
       class="position-button over-map"
-      large
+      :class="{ 'logged-in': user }"
+      medium
       fab
     >
       <v-icon>mdi-crosshairs</v-icon>
@@ -21,7 +22,7 @@
               color="primary"
               v-on="on"
               class="scanner-button over-map"
-              large
+              medium
               fab
             >
               <v-icon>mdi-qrcode</v-icon>
@@ -185,9 +186,15 @@ export default {
 }
 .position-button {
   position: fixed !important;
+  top: 60px;
+  right: 10px;
+}
+
+.position-button.logged-in {
   top: 10px;
   right: 80px;
 }
+
 .profile-wrapper {
   position: fixed;
   bottom: 0;
