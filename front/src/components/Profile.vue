@@ -24,7 +24,7 @@
       ></v-progress-linear>
       <v-row class="mobile-column">
         <v-col class="no-padding-bottom no-padding-mobile text-left">{{ user.score }}</v-col>
-        <v-col class="no-padding-bottom no-padding-mobile text-center"> Lvl. {{ currentLevel }}</v-col>
+        <v-col class="no-padding-bottom no-padding-mobile text-center"> Poziom {{ currentLevel }}</v-col>
         <v-col class="no-padding-bottom no-padding-mobile text-right">{{ neededForNextLevel }}</v-col>
       </v-row>
     </v-card-text>
@@ -58,7 +58,7 @@ export default {
       return this.levelTreshholds.slice().pop();
     },
     currentLevel() {
-      return this.levelTreshholds.indexOf(this.neededForNextLevel);
+      return this.levelTreshholds.indexOf(this.neededForNextLevel) + 1;
     }
   }
 };

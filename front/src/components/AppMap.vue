@@ -16,8 +16,8 @@
       <l-marker v-for="marker in markers" :key="marker.id" :lat-lng="marker.geometry.coordinates" @click="showPopup">
         <l-popup>
           <p class="marker__text">{{marker.properties.popupContent}}</p>
-          <a class="marker__link" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a>
-          <a class="marker__link" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Znajdź drogę <v-icon  color="#fbc02d">mdi-google-maps</v-icon></a>
+          <a class="marker__link" target="_blank" :href="baseUrl + '&origin=' + setCoords(user.geometry.coordinates) + '&destination=' + setCoords(marker.geometry.coordinates)" v-if="user.geometry.coordinates">Znajdź drogę <v-icon color="#fbc02d">mdi-google-maps</v-icon></a>
+          <a class="marker__link" target="_blank" :href="baseUrl + '&destination=' + setCoords(marker.geometry.coordinates)" v-else>Znajdź drogę <v-icon  color="#fbc02d">mdi-google-maps</v-icon></a>
         </l-popup>
     </l-marker>
   </l-map>
