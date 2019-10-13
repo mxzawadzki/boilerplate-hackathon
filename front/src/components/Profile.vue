@@ -20,7 +20,7 @@
     </v-card-text>
     <v-card-actions>
       <div class="flex-grow-1"></div>
-      <v-btn color="green darken-1" text @click="$emit('logout')">
+      <v-btn color="blue darken-1" text @click="$emit('logout')">
         Logout
       </v-btn>
     </v-card-actions>

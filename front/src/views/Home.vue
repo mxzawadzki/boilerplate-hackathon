@@ -32,7 +32,7 @@
         </v-dialog>
       </v-row>
       <div class="profile-wrapper over-map">
-        <Profile :user="user" />
+        <Profile :user="user" @logout="logout" />
       </div>
     </template>
     <!-- logged in user -->
@@ -50,14 +50,7 @@
               </div>
             </template>
             <v-card>
-              <Login :loginData.sync="loginData" />
-              <v-card-actions>
-                <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="login">Login</v-btn>
-                <v-btn color="blue darken-1" text @click="loginModal = false"
-                  >Close</v-btn
-                >
-              </v-card-actions>
+              <Login :loginData.sync="loginData" @login="login" />
             </v-card>
           </v-dialog>
         </v-row>
@@ -76,7 +69,7 @@ import Scanner from "@/components/Scanner.vue";
 import Profile from "@/components/Profile.vue";
 import Login from "@/components/Login.vue";
 
-import { getUser, isLoggedIn, login } from "@/utils/api.js";
+import { getUser, isLoggedIn, login, logout } from "@/utils/api.js";
 
 export default {
   name: "home",
@@ -89,6 +82,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       scannerModal: false,
       loginModal: false,
       user: null,
@@ -100,9 +94,16 @@ export default {
     };
   },
   mounted() {
-    // check token
     if (isLoggedIn()) {
-      // getUser
+      this.loading = true;
+      getUser().then(userData => {
+        this.user = {
+          name: userData.name,
+          email: userData.email,
+          score: userData.score
+        };
+        this.loading = false;
+      });
     }
   },
   methods: {
@@ -119,10 +120,20 @@ export default {
       };
     },
     async login() {
+      this.loading = true;
       const { email, password } = this.loginData;
       await login({ email, password });
       const userData = await getUser();
-      debugger
+      this.user = {
+        name: userData.name,
+        email: userData.email,
+        score: userData.score
+      };
+      this.loading = false;
+    },
+    logout() {
+      this.user = null;
+      logout();
     }
   }
 };

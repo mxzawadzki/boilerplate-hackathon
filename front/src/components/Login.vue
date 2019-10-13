@@ -5,8 +5,9 @@
       <div class="flex-grow-1"></div>
     </v-toolbar>
     <v-card-text>
-      <v-form>
+      <v-form @submit="login">
         <v-text-field
+          @keydown.enter="login"
           label="Email"
           name="email"
           v-model="computedLoginData.email"
@@ -15,6 +16,7 @@
         ></v-text-field>
 
         <v-text-field
+          @keydown.enter="login"
           id="password"
           label="Password"
           name="password"
@@ -24,6 +26,10 @@
         ></v-text-field>
       </v-form>
     </v-card-text>
+    <v-card-actions>
+      <div class="flex-grow-1"></div>
+      <v-btn color="blue darken-1" text @click="login">Login</v-btn>
+    </v-card-actions>
   </div>
 </template>
 
@@ -38,6 +44,14 @@ export default {
       set(v) {
         this.$emit("update:loginData", v);
       }
+    }
+  },
+  methods: {
+    submit() {
+      this.$emit("login");
+    },
+    login() {
+      this.$emit("login");
     }
   }
 };
