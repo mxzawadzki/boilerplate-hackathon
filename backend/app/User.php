@@ -37,6 +37,14 @@ use App\Models\LinkedSocialAccount;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereScore($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $api_token
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LinkedSocialAccount[] $linkedSocialAccounts
+ * @property-read int|null $linked_social_accounts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereApiToken($value)
  */
 class User extends Authenticatable
 {

@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         factory(App\User::class, 50)->create()->each(function ($user) {
             $user->is_admin = false;
-            $user->api_token = Str::random(60);
+
             $user->save();
         });
 
@@ -21,15 +21,8 @@ class UsersTableSeeder extends Seeder
         factory(App\User::class, 1)->create()->each(function ($user) {
             $user->email = "admin@example.com";
             $user->password = Hash::make('123456');
-            $user->api_token = Str::random(60);
             $user->save();
         });
 
-        factory(App\User::class, 1)->create()->each(function ($user) {
-            $user->email = "machine@example.com";
-            $user->password = Hash::make('123456');
-            $user->api_token = "jf4WSD36OfhcN4114csvphqeYDeBcvKknZTv927uudBck5Cklnusw8FexI6t";
-            $user->save();
-        });
     }
 }

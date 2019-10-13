@@ -36,6 +36,14 @@ use Backpack\CRUD\app\Notifications\ResetPasswordNotification as ResetPasswordNo
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereScore($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $api_token
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LinkedSocialAccount[] $linkedSocialAccounts
+ * @property-read int|null $linked_social_accounts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BackpackUser whereApiToken($value)
  */
 class BackpackUser extends User
 {
